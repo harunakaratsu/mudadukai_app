@@ -39,6 +39,10 @@
 
 https://www.figma.com/file/SbIYHkDvhoVp4yWFkVP0AN/%E7%84%A1%E9%A7%84%E9%81%A3%E3%81%84%E3%82%A2%E3%83%97%E3%83%AA?node-id=0%3A1
 
+### ER図
+
+https://drive.google.com/file/d/1TZsKM8p3CQ4uPRDeSpvWV77ezhEezwMS/view?usp=sharing
+
 ### スケジュール
 企画・技術調査： 1/16〆切
 README〜ER図作成：1/23〆切
