@@ -27,3 +27,5 @@
 /config/master.key
 
 /vendor/bundle
+.env
+/public
