@@ -38,12 +38,21 @@ group :development, :test do
   # Code analyze
   gem 'rubocop'
   gem 'rubocop-rails'
+
+  # Debugger
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
