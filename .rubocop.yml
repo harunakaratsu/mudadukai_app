@@ -1,0 +1,47 @@
+# Excludeは除外ディレクトリ
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'lib/**/*'
+    - 'tmp/**/*'
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# ブロックの長さの最大値
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'Gemfile'
+    - 'config/**/*'
+
+# メソッド名の先頭にset_/get_を許可する
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/controllers/**/*'
+
+# クラスとモジュールは入れ子構造でなくてもよい
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# クラス定義した際にコメント不要
+Style/Documentation:
+  Enabled: false
+
+# ファイルの先頭に文字列をfreezeするかの記述をしなくてもよい
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 並びはアルファベット順でなくてもよい
+Bundler/OrderedGems:
+  Enabled: false
+
+# 特別な理由がなくダブルクォートを使っていないかチェック
+Style/StringLiterals:
+  Exclude:
+    - 'config/**/*'
