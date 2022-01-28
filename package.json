@@ -1,0 +1,14 @@
+{
+  "name": "mudadukai_app",
+  "version": "1.0.0",
+  "description": "お菓子やジュースなどの間食で無駄遣いをしている人に",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build && cd ..",
+    "deploy": "cp -a frontend/build/. public/",
+    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client built!'"
+  }
+}
