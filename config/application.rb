@@ -40,6 +40,6 @@ module MudadukaiApp
     config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :local
 
-    config.x.cors_allowed_origins = ENV.fetch('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')
+    config.x.cors_allowed_origins = JSON.parse(ENV.fetch('CORS_ALLOWED_ORIGINS') { '[]' })
   end
 end
