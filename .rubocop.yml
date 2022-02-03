@@ -45,3 +45,7 @@ Bundler/OrderedGems:
 Style/StringLiterals:
   Exclude:
     - 'config/**/*'
+
+# 変数への代入、メソッド呼び出し、条件文の合計の基準値を緩くする
+Metrics/AbcSize:
+  Max: 20
