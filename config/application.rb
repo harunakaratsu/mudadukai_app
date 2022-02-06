@@ -37,6 +37,12 @@ module MudadukaiApp
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
+
+    config.session_store :cookie_store, secure: Rails.env.production?
+
     config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :local
 
