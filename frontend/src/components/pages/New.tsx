@@ -16,7 +16,7 @@ export const New: VFC = memo(() => {
   }
 
   const onClickCreateFood = () => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/foods`, {
+    axios.post("/foods", {
             name: createFood.name,
             price: createFood.price,
             calorie: createFood.calorie

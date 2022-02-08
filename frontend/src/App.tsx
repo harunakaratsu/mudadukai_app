@@ -16,7 +16,7 @@ export const App = () => {
           const idToken = liff.getIDToken()
           const params = new URLSearchParams()
           params.append("idToken", idToken as string)
-          axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, params)
+          axios.post("/users", params)
               .then(res => {
                 // IdTokenの有効期限が切れたらログアウトする
                 if (res.data.error_description === 'IdToken expired.') {
