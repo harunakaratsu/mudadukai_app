@@ -1,0 +1,54 @@
+// 全体
+$mainColor: #FC8181;
+$fontColor: #4A5568;
+
+.fc {
+  padding: 5px;
+  color: #4A5568;
+}
+
+// 20xx年xx月
+.fc-toolbar-title {
+  font-weight: bold;
+  color: $fontColor;
+}
+
+// < >ボタン
+.fc-button-primary {
+  background-color: $mainColor !important;
+  opacity: 1 !important;
+  border: none !important;
+
+  &active {
+    background-color: $mainColor !important;
+  }
+}
+
+// 今日
+.fc-day-today {
+  background-color: #FFF5F5 !important;
+}
+
+// 日付
+.fc-daygrid-day-number,
+.fc-col-header-cell-cushion {
+  font-size: 12px;
+}
+
+// イベント
+.fc-event {
+  margin: 0;
+
+  &-title {
+    font-size: 10px;
+    margin-left: 3px;
+  }
+}
+
+.fc-daygrid-event-dot {
+  display: none;
+}
+
+.fc-event-time{
+  display : none;
+}
