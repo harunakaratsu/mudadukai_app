@@ -48,7 +48,6 @@ export const Calendar: VFC = memo(() => {
                     dayCellContent={ dayCellContent }
                     eventDisplay="list-item"
                     events={ foods.map((food) => ({
-                      id: food.id,
                       title: food.name,
                       date: food.created_at
                     })) }
