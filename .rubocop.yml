@@ -8,6 +8,7 @@ AllCops:
     - 'tmp/**/*'
     - 'spec/**/*'
     - 'node_modules/**/*'
+    - 'frontend/node_modules/**/*'
 
 # 日本語でのコメントを許可
 AsciiComments:
@@ -49,3 +50,7 @@ Style/StringLiterals:
 # 変数への代入、メソッド呼び出し、条件文の合計の基準値を緩くする
 Metrics/AbcSize:
   Max: 20
+
+# 複数行ブロックの場合で->を許可
+Style/Lambda:
+  Enabled: false
