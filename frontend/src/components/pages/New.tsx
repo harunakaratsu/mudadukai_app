@@ -2,6 +2,7 @@ import { memo, useCallback, useState, VFC } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import dayjs from "dayjs"
+import liff from "@line/liff/dist/lib"
 import { Button, Center, Flex, FormControl, Input, Link, Stack, Text } from "@chakra-ui/react"
 
 import { useMessage } from "../../hooks/useMessage"
@@ -31,6 +32,7 @@ export const New: VFC = memo(() => {
           .then(() => {
             showMessage({ status: "success", title: "記録しました" })
             resetInput()
+            liff.closeWindow()
           })
           .catch((e) => {
             showMessage({ status: "error", title: "記録に失敗しました" })
