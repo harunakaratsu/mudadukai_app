@@ -49,8 +49,17 @@ Style/StringLiterals:
 
 # 変数への代入、メソッド呼び出し、条件文の合計の基準値を緩くする
 Metrics/AbcSize:
-  Max: 20
+  Max: 30
+
+# メソッドの長さの基準値を緩くする
+Metrics/MethodLength:
+  CountComments: false
+  Max: 30
 
 # 複数行ブロックの場合で->を許可
 Style/Lambda:
+  Enabled: false
+
+# 数値を3ケタ区切りで_で区切っているかどうかチェックを無視する
+NumericLiterals:
   Enabled: false
