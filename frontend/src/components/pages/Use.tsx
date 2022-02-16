@@ -1,14 +1,9 @@
-import { memo, useCallback, VFC } from "react"
-import liff from "@line/liff/dist/lib"
+import { memo, VFC } from "react"
 import { Stack, Text } from "@chakra-ui/react"
-import { CloseIcon } from "@chakra-ui/icons"
 
 export const Use: VFC = memo(() => {
-  const onClickClose = useCallback(() => liff.closeWindow(), [])
-
   return (
     <Stack spacing={5} p={10}>
-      <CloseIcon ml="auto" onClick={ onClickClose } />
       <Text fontSize='lg' fontWeight="bold" textAlign="center" pb={5}>使い方</Text>
       <Text>① メニューの「記録する」から無駄遣いしたものを記録します。</Text>
       <Text>② メニューの「記録を見る」で記録を確認できます。</Text>
