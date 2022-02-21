@@ -2,6 +2,10 @@
 $mainColor: #FC8181;
 $fontColor: #4A5568;
 
+body {
+  color: $fontColor !important;
+}
+
 .fc {
   padding: 5px;
   color: #4A5568;

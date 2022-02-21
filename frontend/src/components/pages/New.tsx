@@ -1,4 +1,4 @@
-import { memo, useCallback, useState, VFC } from "react"
+import { memo, useCallback, useEffect, useState, VFC } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import dayjs from "dayjs"
@@ -41,7 +41,29 @@ export const New: VFC = memo(() => {
   }
 
   const navigate = useNavigate()
-  const onClickShowCalendar = useCallback(() => navigate("/"), [navigate])
+  const onClickShowCalendar = useCallback(() => navigate("/calendar"), [navigate])
+
+  useEffect(() => {
+    liff.init({ liffId: process.env.REACT_APP_LIFF_ID as string })
+        .then(() => {
+          // ログインしていなかったらログインする
+          if (!liff.isLoggedIn()) {
+            liff.login()
+          }
+
+          const idToken = liff.getIDToken()
+          const params = new URLSearchParams()
+          params.append("idToken", idToken as string)
+          axios.post("/users", params)
+              .then(res => {
+                // IdTokenの有効期限が切れたらログアウトする
+                if (res.data.error_description === 'IdToken expired.') {
+                  liff.logout()
+                }
+              })
+              .catch(e => console.error(e))
+        })
+  }, [])
 
   return (
     <Flex align="center" justify="center" height="100vh">
