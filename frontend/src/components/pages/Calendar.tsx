@@ -1,5 +1,7 @@
-import { memo, useCallback, useState, VFC } from "react"
+import { memo, useCallback, useEffect, useState, VFC } from "react"
+import axios from "axios"
 import dayjs from "dayjs"
+import liff from "@line/liff/dist/lib"
 import { useDisclosure } from "@chakra-ui/react"
 
 import FullCalendar, { EventClickArg } from "@fullcalendar/react"
@@ -32,6 +34,28 @@ export const Calendar: VFC = memo(() => {
     setClickDay(dayjs(arg.dateStr).format("D"))
     onOpen()
   }, [onOpen, foods])
+
+  useEffect(() => {
+    liff.init({ liffId: process.env.REACT_APP_LIFF_ID as string })
+        .then(() => {
+          // ログインしていなかったらログインする
+          if (!liff.isLoggedIn()) {
+            liff.login()
+          }
+
+          const idToken = liff.getIDToken()
+          const params = new URLSearchParams()
+          params.append("idToken", idToken as string)
+          axios.post("/users", params)
+              .then(res => {
+                // IdTokenの有効期限が切れたらログアウトする
+                if (res.data.error_description === 'IdToken expired.') {
+                  liff.logout()
+                }
+              })
+              .catch(e => console.error(e))
+        })
+  }, [])
 
   return (
     <>
