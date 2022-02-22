@@ -44,7 +44,7 @@ export const New: VFC = memo(() => {
   const onClickShowCalendar = useCallback(() => navigate("/calendar"), [navigate])
 
   useEffect(() => {
-    liff.init({ liffId: process.env.REACT_APP_LIFF_ID as string })
+    liff.init({ liffId: process.env.REACT_APP_LIFF_ID_NEW as string })
         .then(() => {
           // ログインしていなかったらログインする
           if (!liff.isLoggedIn()) {
