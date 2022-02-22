@@ -36,7 +36,7 @@ export const Calendar: VFC = memo(() => {
   }, [onOpen, foods])
 
   useEffect(() => {
-    liff.init({ liffId: process.env.REACT_APP_LIFF_ID as string })
+    liff.init({ liffId: process.env.REACT_APP_LIFF_ID_CALENDAR as string })
         .then(() => {
           // ログインしていなかったらログインする
           if (!liff.isLoggedIn()) {
