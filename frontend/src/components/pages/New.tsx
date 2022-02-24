@@ -3,23 +3,26 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import dayjs from "dayjs"
 import liff from "@line/liff/dist/lib"
-import { Button, Center, Flex, FormControl, Input, Link, Stack, Text } from "@chakra-ui/react"
+import { Button, Center, Flex, FormControl, Link, Stack, Text } from "@chakra-ui/react"
 
+import { FoodDetailAccordion } from "../organisms/FoodDetailAccordion"
 import { useMessage } from "../../hooks/useMessage"
 import { PigImage } from "../atoms/images/PigImage"
 import { CreateInput } from "../atoms/inputs/CreateInput"
 
 export const New: VFC = memo(() => {
-  const [ createFood, setCreateFood ] = useState({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD") })
+  const [ createFood, setCreateFood ] = useState({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "" })
   const { showMessage } = useMessage()
 
   const onChangeName = useCallback((e) => setCreateFood({...createFood, name: e.target.value}), [createFood])
   const onChangePrice = useCallback((e) => setCreateFood({...createFood, price: e.target.value}), [createFood])
   const onChangeCalorie = useCallback((e) => setCreateFood({...createFood, calorie: e.target.value}), [createFood])
   const onChangeCreatedAt = useCallback((e) => setCreateFood({...createFood, created_at: e.target.value}), [createFood])
+  const onChangePlace = useCallback((e) => setCreateFood({...createFood, place: e.target.value}), [createFood])
+  const onChangeMemo = useCallback((e) => setCreateFood({...createFood, memo: e.target.value}), [createFood])
 
   const resetInput = () => {
-    setCreateFood({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD") })
+    setCreateFood({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "" })
   }
 
   const onClickCreateFood = () => {
@@ -27,7 +30,9 @@ export const New: VFC = memo(() => {
             name: createFood.name,
             price: createFood.price,
             calorie: createFood.calorie,
-            created_at: createFood.created_at
+            created_at: createFood.created_at,
+            place: createFood.place,
+            memo: createFood.memo
           })
           .then(() => {
             showMessage({ status: "success", title: "記録しました" })
@@ -86,9 +91,7 @@ export const New: VFC = memo(() => {
           <CreateInput value={ createFood.calorie } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
         </FormControl>
 
-        <FormControl>
-          <Input type="date" _focus={{ boxShadow: "none"}} value={ createFood.created_at } onChange={ onChangeCreatedAt } color="gray.600"  />
-        </FormControl>
+        <FoodDetailAccordion createFood={ createFood } onChangeCreatedAt={ onChangeCreatedAt } onChangePlace={ onChangePlace } onChangeMemo={ onChangeMemo } />
 
         <Button color="white" bg="red.300" onClick={ onClickCreateFood }>記録する</Button>
 

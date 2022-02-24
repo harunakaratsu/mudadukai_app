@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, memo, SetStateAction, useState, VFC } from "react"
 import axios from "axios"
 import dayjs from "dayjs"
-import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react"
+import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea } from "@chakra-ui/react"
 
 import { Food } from "../../type/Food"
 import { usePigImages } from "../../hooks/usePigImages"
@@ -27,24 +27,29 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   const [ foodPrice, setFoodPrice ] = useState(food.price)
   const [ foodCalorie, setFoodCalorie ] = useState(food.calorie)
   const [ foodCreatedAt, setFoodCreatedAt ] = useState(food.created_at)
+  const [ foodPlace, setFoodPlace ] = useState(food.place)
+  const [ foodMemo, setFoodMemo ] = useState(food.memo)
 
   const onChangeFoodName = (e: ChangeEvent<HTMLInputElement>) => setFoodName(e.target.value)
   const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(Number(e.target.value))
   const onChangeFoodCalorie = (e: ChangeEvent<HTMLInputElement>) => setFoodCalorie(Number(e.target.value))
   const onChangeFoodCreatedAt = (e: ChangeEvent<HTMLInputElement>) => setFoodCreatedAt(e.target.value)
+  const onChangeFoodPlace = (e: ChangeEvent<HTMLInputElement>) => setFoodPlace(e.target.value)
+  const onChangeFoodMemo = (e: ChangeEvent<HTMLTextAreaElement>) => setFoodMemo(e.target.value)
 
   const onClickUpdate = () => {
     axios.put(`/foods/${food.id}`, {
             name: foodName,
             price: foodPrice,
             calorie: foodCalorie,
-            created_at: foodCreatedAt
+            created_at: foodCreatedAt,
+            place: foodPlace,
+            memo: foodMemo
          })
          .then((res) => {
-           food.name = foodName
-           food.price = foodPrice
-           food.calorie = foodCalorie
-           food.created_at = foodCreatedAt
+           const newFoods = [...foods]
+           newFoods.splice(foods.findIndex(f => f.id === food.id), 1, res.data)
+           setFoods(newFoods)
            onCloseDrawer()
            showMessage({ status: "success", title: "記録を編集しました" })
         })
@@ -86,15 +91,23 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           <Stack>
             <FormControl>
               <FormLabel>価格</FormLabel>
-              <ModalInput value={ foodPrice } onChange={ onChangeFoodPrice } type="number" />
+              <ModalInput value={ foodPrice } onChange={ onChangeFoodPrice } />
             </FormControl>
             <FormControl>
               <FormLabel>カロリー</FormLabel>
-              <ModalInput value={ foodCalorie } onChange={ onChangeFoodCalorie } type="number" />
+              <ModalInput value={ foodCalorie } onChange={ onChangeFoodCalorie } />
             </FormControl>
             <FormControl>
               <FormLabel>購入日時</FormLabel>
               <ModalInput value={ dayjs(foodCreatedAt).format("YYYY-MM-DD") } onChange={ onChangeFoodCreatedAt } type="date" />
+            </FormControl>
+            <FormControl>
+              <FormLabel>購入場所</FormLabel>
+              <ModalInput value={ foodPlace } onChange={ onChangeFoodPlace } />
+            </FormControl>
+            <FormControl>
+              <FormLabel>メモ</FormLabel>
+              <Textarea value={ foodMemo } onChange={ onChangeFoodMemo } bg="white" _focus={{ boxShadow: "none"}} />
             </FormControl>
 
             <ModalFooter px={0} py={5}>

@@ -4,4 +4,6 @@ export type Food = {
   price: number
   calorie: number
   created_at: string
+  place: string
+  memo: string
 }

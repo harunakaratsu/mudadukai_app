@@ -56,4 +56,26 @@ RSpec.describe Food, type: :model do
       expect(food).to  be_invalid
     end
   end
+
+  context "購入場所が255文字以上である場合" do
+    it "無効であること" do
+      food = build(:food, place: "a" * 256)
+      expect(food).to be_invalid
+    end
+  end
+
+  context "メモが65535文字以上である場合" do
+    it "無効であること" do
+      food = build(:food, memo: "a" * 65_536)
+      expect(food).to be_invalid
+    end
+  end
+
+  context "ユーザーが削除された場合" do
+    it "foodも削除されること" do
+      food = build(:food)
+      food.user.destroy
+      expect(Food.count).to eq 0
+    end
+  end
 end

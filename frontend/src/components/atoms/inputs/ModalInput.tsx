@@ -4,7 +4,7 @@ import { Input } from "@chakra-ui/react"
 type Props = {
   value: number | string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  type: string
+  type?: string
 }
 
 export const ModalInput: VFC<Props> = memo((props) => {
