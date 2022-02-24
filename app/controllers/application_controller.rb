@@ -6,4 +6,10 @@ class ApplicationController < ActionController::API
       format.html { render body: Rails.root.join('public/index.html').read }
     end
   end
+
+  private
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 end

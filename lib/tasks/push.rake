@@ -124,7 +124,6 @@ namespace :push_line do
         config.channel_token = ENV['LIFF_CHANNEL_ACCESS_TOKEN']
       }
       response = client.push_message(user.line_user_id, message)
-      p response
     end
   end
 
@@ -253,7 +252,6 @@ namespace :push_line do
         config.channel_token = ENV['LIFF_CHANNEL_ACCESS_TOKEN']
       }
       response = client.push_message(user.line_user_id, message)
-      p response
     end
   end
 end
