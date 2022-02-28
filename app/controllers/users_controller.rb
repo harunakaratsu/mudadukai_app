@@ -12,6 +12,6 @@ class UsersController < ApplicationController
     user = User.find_by(line_user_id: line_user_id)
     user.nil? && user = User.create(line_user_id: line_user_id)
     session[:user_id] = user.id
-    render json: user
+    render json: res.body
   end
 end

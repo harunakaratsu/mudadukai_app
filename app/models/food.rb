@@ -6,4 +6,5 @@ class Food < ApplicationRecord
   validates :calorie, presence: true, numericality: { greater_than: 0 }
   validates :place, length: { maximum: 255 }
   validates :memo, length: { maximum: 65_535 }
+  validates :favorite, inclusion: [true, false]
 end

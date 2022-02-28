@@ -18,16 +18,16 @@ type Props = {
 
 export const ClickDayFoodsDetailDrawer: VFC<Props> = memo((props) => {
   const { isOpen, onCloseDrawer, foods, clickDay, setFoods } = props
-  const [ foodsPrice, setFoodsPrice ] = useState(0)
-  const [ foodsCalorie, setFoodsCalorie ] = useState(0)
+  const [ foodsPrice, setFoodsPrice ] = useState<number | null>()
+  const [ foodsCalorie, setFoodsCalorie ] = useState<number | null>()
 
   useEffect(() => {
-    setFoodsPrice(foods ? foods.map(food => food.price).reduce((a, b) => a + b, 0) : 0)
-    setFoodsCalorie(foods ? foods.map(food => food.calorie).reduce((a, b) => a + b, 0) : 0)
+    setFoodsPrice(foods ? foods.map(food => food.price || 0).reduce((a, b) => a + b, 0) : 0)
+    setFoodsCalorie(foods ? foods.map(food => food.calorie || 0).reduce((a, b) => a + b, 0) : 0)
   }, [foods])
 
-  const { pigImages } = usePigImages({ food: { calorie: foodsCalorie } })
-  const { bgColor } = useBgColor({ food: { price: foodsPrice } })
+  const { pigImages } = usePigImages({ food: { calorie: foodsCalorie || 0 } })
+  const { bgColor } = useBgColor({ food: { price: foodsPrice || 0} })
 
   return (
     <Drawer placement='bottom' onClose={onCloseDrawer} isOpen={isOpen} size="md" autoFocus={false}>
@@ -40,15 +40,15 @@ export const ClickDayFoodsDetailDrawer: VFC<Props> = memo((props) => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              { foodsCalorie > 0 && <Center py={5}>{ pigImages }</Center> }
+              { foodsCalorie ? <Center py={5}>{ pigImages }</Center> : "" }
               <Stack>
               <FormControl>
                 <FormLabel>使った金額</FormLabel>
-                <ReadOnlyInput value={ foodsPrice } />
+                <ReadOnlyInput value={ foodsPrice || 0 } />
               </FormControl>
               <FormControl>
                 <FormLabel>摂取カロリー</FormLabel>
-                <ReadOnlyInput value={ foodsCalorie } />
+                <ReadOnlyInput value={ foodsCalorie || 0 } />
               </FormControl>
               </Stack>
             </TabPanel>

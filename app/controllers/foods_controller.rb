@@ -49,10 +49,15 @@ class FoodsController < ApplicationController
     render json: @food, status: :ok
   end
 
+  def favorite_foods
+    favorite_foods = current_user.favorites
+    render json: favorite_foods, status: :ok
+  end
+
   private
 
   def food_params
-    params.require(:food).permit(:name, :price, :calorie, :created_at, :place, :memo)
+    params.require(:food).permit(:name, :price, :calorie, :created_at, :place, :memo, :favorite)
   end
 
   def set_food

@@ -31,12 +31,13 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   const [ foodMemo, setFoodMemo ] = useState(food.memo)
 
   const onChangeFoodName = (e: ChangeEvent<HTMLInputElement>) => setFoodName(e.target.value)
-  const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(Number(e.target.value))
-  const onChangeFoodCalorie = (e: ChangeEvent<HTMLInputElement>) => setFoodCalorie(Number(e.target.value))
+  const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(e.target.valueAsNumber)
+  const onChangeFoodCalorie = (e: ChangeEvent<HTMLInputElement>) => setFoodCalorie(e.target.valueAsNumber)
   const onChangeFoodCreatedAt = (e: ChangeEvent<HTMLInputElement>) => setFoodCreatedAt(e.target.value)
   const onChangeFoodPlace = (e: ChangeEvent<HTMLInputElement>) => setFoodPlace(e.target.value)
   const onChangeFoodMemo = (e: ChangeEvent<HTMLTextAreaElement>) => setFoodMemo(e.target.value)
 
+  // Foodを編集する
   const onClickUpdate = () => {
     axios.put(`/foods/${food.id}`, {
             name: foodName,
@@ -59,6 +60,7 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
         })
   }
 
+  // Foodを削除する
   const onClickDelete = () => {
     axios.delete(`/foods/${food.id}`)
           .then(() => {
@@ -71,8 +73,8 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           .catch(e => console.error(e))
   }
 
-  const { bgColor } = useBgColor({ food: { price: foodPrice } })
-  const { pigImages } = usePigImages({ food: { calorie: foodCalorie } })
+  const { bgColor } = useBgColor({ food: { price: foodPrice || 0 } })
+  const { pigImages } = usePigImages({ food: { calorie: foodCalorie || 0 } })
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="full">
@@ -91,11 +93,11 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           <Stack>
             <FormControl>
               <FormLabel>価格</FormLabel>
-              <ModalInput value={ foodPrice } onChange={ onChangeFoodPrice } />
+              <ModalInput value={ foodPrice || 0 } onChange={ onChangeFoodPrice } />
             </FormControl>
             <FormControl>
               <FormLabel>カロリー</FormLabel>
-              <ModalInput value={ foodCalorie } onChange={ onChangeFoodCalorie } />
+              <ModalInput value={ foodCalorie || 0 } onChange={ onChangeFoodCalorie } />
             </FormControl>
             <FormControl>
               <FormLabel>購入日時</FormLabel>
