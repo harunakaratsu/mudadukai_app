@@ -71,6 +71,13 @@ RSpec.describe Food, type: :model do
     end
   end
 
+  context "favoriteがnilである場合" do
+    it "無効であること" do
+      food = build(:food, favorite: nil)
+      expect(food).to be_invalid
+    end
+  end
+
   context "ユーザーが削除された場合" do
     it "foodも削除されること" do
       food = build(:food)

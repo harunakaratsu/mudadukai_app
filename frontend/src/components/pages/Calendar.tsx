@@ -35,6 +35,7 @@ export const Calendar: VFC = memo(() => {
     onOpen()
   }, [onOpen, foods])
 
+  // ログインする
   useEffect(() => {
     liff.init({ liffId: process.env.REACT_APP_LIFF_ID_CALENDAR as string })
         .then(() => {
@@ -47,13 +48,13 @@ export const Calendar: VFC = memo(() => {
           const params = new URLSearchParams()
           params.append("idToken", idToken as string)
           axios.post("/users", params)
-              .then(res => {
+               .then(res => {
                 // IdTokenの有効期限が切れたらログアウトする
                 if (res.data.error_description === 'IdToken expired.') {
                   liff.logout()
                 }
-              })
-              .catch(e => console.error(e))
+               })
+               .catch(e => console.error(e))
         })
   }, [])
 

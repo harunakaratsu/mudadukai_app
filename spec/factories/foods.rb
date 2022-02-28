@@ -5,6 +5,7 @@ FactoryBot.define do
     calorie { 100 }
     place { "place" }
     memo { "memo" }
+    favorite { false }
     association :user
   end
 end

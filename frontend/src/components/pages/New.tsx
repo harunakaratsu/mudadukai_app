@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import dayjs from "dayjs"
 import liff from "@line/liff/dist/lib"
-import { Button, Center, Flex, FormControl, Link, Stack, Text } from "@chakra-ui/react"
+import { Button, Center, Flex, FormControl, FormLabel, InputGroup, InputRightElement, Link, Stack, Switch, Text } from "@chakra-ui/react"
 
 import { FoodDetailAccordion } from "../organisms/FoodDetailAccordion"
+import { FavoritesMenu } from "../organisms/FavoritesMenu"
 import { useMessage } from "../../hooks/useMessage"
 import { PigImage } from "../atoms/images/PigImage"
 import { CreateInput } from "../atoms/inputs/CreateInput"
+import { Food } from "../../type/Food"
 
 export const New: VFC = memo(() => {
-  const [ createFood, setCreateFood ] = useState({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "" })
+  const [ createFood, setCreateFood ] = useState<Omit<Food, "id">>({ name: "", price: null, calorie: null, created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "", favorite: false })
   const { showMessage } = useMessage()
 
   const onChangeName = useCallback((e) => setCreateFood({...createFood, name: e.target.value}), [createFood])
@@ -20,11 +22,14 @@ export const New: VFC = memo(() => {
   const onChangeCreatedAt = useCallback((e) => setCreateFood({...createFood, created_at: e.target.value}), [createFood])
   const onChangePlace = useCallback((e) => setCreateFood({...createFood, place: e.target.value}), [createFood])
   const onChangeMemo = useCallback((e) => setCreateFood({...createFood, memo: e.target.value}), [createFood])
+  const onChangeFavorite = useCallback((e) => setCreateFood({...createFood, favorite: e.target.checked}), [createFood])
 
+  // 入力欄をリセットする
   const resetInput = () => {
-    setCreateFood({ name: "", price: "", calorie: "", created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "" })
+    setCreateFood({ name: "", price: null, calorie: null, created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "", favorite: false })
   }
 
+  // Foodを作成する
   const onClickCreateFood = () => {
     axios.post("/foods", {
             name: createFood.name,
@@ -32,7 +37,8 @@ export const New: VFC = memo(() => {
             calorie: createFood.calorie,
             created_at: createFood.created_at,
             place: createFood.place,
-            memo: createFood.memo
+            memo: createFood.memo,
+            favorite: createFood.favorite
           })
           .then(() => {
             showMessage({ status: "success", title: "記録しました" })
@@ -45,9 +51,11 @@ export const New: VFC = memo(() => {
           })
   }
 
+  // カレンダーへ移動する
   const navigate = useNavigate()
   const onClickShowCalendar = useCallback(() => navigate("/calendar"), [navigate])
 
+  // ログインする
   useEffect(() => {
     liff.init({ liffId: process.env.REACT_APP_LIFF_ID_NEW as string })
         .then(() => {
@@ -60,13 +68,13 @@ export const New: VFC = memo(() => {
           const params = new URLSearchParams()
           params.append("idToken", idToken as string)
           axios.post("/users", params)
-              .then(res => {
+               .then(res => {
                 // IdTokenの有効期限が切れたらログアウトする
                 if (res.data.error_description === 'IdToken expired.') {
                   liff.logout()
                 }
-              })
-              .catch(e => console.error(e))
+               })
+               .catch(e => console.error(e))
         })
   }, [])
 
@@ -80,18 +88,30 @@ export const New: VFC = memo(() => {
         </Center>
 
         <FormControl>
-          <CreateInput value={ createFood.name } onChange={ onChangeName } placeholder="名前を入力"  />
+          <InputGroup>
+            <CreateInput value={ createFood.name } onChange={ onChangeName } placeholder="名前を入力"  />
+            <InputRightElement width='3rem'>
+              <FavoritesMenu createFood={ createFood } setCreateFood={ setCreateFood } />
+            </InputRightElement>
+          </InputGroup>
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.price } onChange={ onChangePrice } placeholder="金額を入力" />
+          <CreateInput value={ createFood.price || "" } onChange={ onChangePrice } placeholder="金額を入力" />
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.calorie } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
+          <CreateInput value={ createFood.calorie || "" } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
         </FormControl>
 
         <FoodDetailAccordion createFood={ createFood } onChangeCreatedAt={ onChangeCreatedAt } onChangePlace={ onChangePlace } onChangeMemo={ onChangeMemo } />
+
+        <FormControl display='flex' alignItems='center' justifyContent="space-between">
+          <FormLabel htmlFor='favorite' mb='0' fontSize="sm" color="gray">
+            お気に入りに登録する
+          </FormLabel>
+          <Switch id='favorite' onChange={ onChangeFavorite } />
+        </FormControl>
 
         <Button color="white" bg="red.300" onClick={ onClickCreateFood }>記録する</Button>
 
