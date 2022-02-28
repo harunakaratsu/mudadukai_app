@@ -31,8 +31,8 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   const [ foodMemo, setFoodMemo ] = useState(food.memo)
 
   const onChangeFoodName = (e: ChangeEvent<HTMLInputElement>) => setFoodName(e.target.value)
-  const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(e.target.valueAsNumber)
-  const onChangeFoodCalorie = (e: ChangeEvent<HTMLInputElement>) => setFoodCalorie(e.target.valueAsNumber)
+  const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(Number(e.target.value))
+  const onChangeFoodCalorie = (e: ChangeEvent<HTMLInputElement>) => setFoodCalorie(Number(e.target.value))
   const onChangeFoodCreatedAt = (e: ChangeEvent<HTMLInputElement>) => setFoodCreatedAt(e.target.value)
   const onChangeFoodPlace = (e: ChangeEvent<HTMLInputElement>) => setFoodPlace(e.target.value)
   const onChangeFoodMemo = (e: ChangeEvent<HTMLTextAreaElement>) => setFoodMemo(e.target.value)
