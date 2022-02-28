@@ -29,7 +29,7 @@ export const FavoritesMenu: VFC<Props> = memo((props) => {
 
   // お気に入りから削除する
   const onClickDeleteFavorite = (favoriteFood: Food) => {
-    axios.put(`http:localhost:3001/foods/${favoriteFood.id}`, {
+    axios.put(`/foods/${favoriteFood.id}`, {
             favorite: false
           })
           .then((res) => {
@@ -40,7 +40,7 @@ export const FavoritesMenu: VFC<Props> = memo((props) => {
           })
           .catch(e => {
             console.error(e)
-            showMessage({ status: "error", title: "お気に入りの削除の編集に失敗しました" })
+            showMessage({ status: "error", title: "お気に入りの削除に失敗しました" })
           })
   }
 
