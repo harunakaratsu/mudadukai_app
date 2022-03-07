@@ -7,6 +7,7 @@ import { Button, Center, Flex, FormControl, FormLabel, InputGroup, InputRightEle
 
 import { FoodDetailAccordion } from "../organisms/FoodDetailAccordion"
 import { FavoritesMenu } from "../organisms/FavoritesMenu"
+import { Suggest } from "../organisms/Suggest"
 import { useMessage } from "../../hooks/useMessage"
 import { PigImage } from "../atoms/images/PigImage"
 import { CreateInput } from "../atoms/inputs/CreateInput"
@@ -16,7 +17,6 @@ export const New: VFC = memo(() => {
   const [ createFood, setCreateFood ] = useState<Omit<Food, "id">>({ name: "", price: null, calorie: null, created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "", favorite: false })
   const { showMessage } = useMessage()
 
-  const onChangeName = useCallback((e) => setCreateFood({...createFood, name: e.target.value}), [createFood])
   const onChangePrice = useCallback((e) => setCreateFood({...createFood, price: e.target.value}), [createFood])
   const onChangeCalorie = useCallback((e) => setCreateFood({...createFood, calorie: e.target.value}), [createFood])
   const onChangeCreatedAt = useCallback((e) => setCreateFood({...createFood, created_at: e.target.value}), [createFood])
@@ -89,7 +89,7 @@ export const New: VFC = memo(() => {
 
         <FormControl>
           <InputGroup>
-            <CreateInput value={ createFood.name } onChange={ onChangeName } placeholder="名前を入力"  />
+            <Suggest createFood={ createFood } setCreateFood={ setCreateFood } />
             <InputRightElement width='3rem'>
               <FavoritesMenu createFood={ createFood } setCreateFood={ setCreateFood } />
             </InputRightElement>
