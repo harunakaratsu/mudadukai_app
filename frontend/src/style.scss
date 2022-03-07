@@ -80,3 +80,38 @@ body {
   border-top: 15px solid #fff;
  }
 }
+
+// サジェスト機能
+.react-autosuggest__container {
+  position: relative;
+}
+
+.react-autosuggest__input {
+  padding: 8px 16px;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  width: 100%;
+  border: 1px solid #E2E8F0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 8px 16px;
+}
