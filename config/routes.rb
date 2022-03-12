@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       get :favorite_foods
     end
   end
+  post 'search_name_and_price', to: 'searches#search_name_and_price'
+  post 'search_calorie', to: 'searches#search_calorie'
 
   get '*path', to: "application#fallback_index_html", constraints: ->(request) do
     !request.xhr? && request.format.html?
