@@ -81,6 +81,13 @@ body {
  }
 }
 
+// バーコード
+#interactive.viewport {
+  video {
+    min-height: 100vh;
+  }
+}
+
 // サジェスト機能
 .react-autosuggest__container {
   position: relative;
