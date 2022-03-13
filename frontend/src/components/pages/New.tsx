@@ -8,6 +8,7 @@ import { Button, Center, Flex, FormControl, FormLabel, InputGroup, InputRightEle
 import { FoodDetailAccordion } from "../organisms/FoodDetailAccordion"
 import { FavoritesMenu } from "../organisms/FavoritesMenu"
 import { Suggest } from "../organisms/Suggest"
+import { useLogin } from "../../hooks/useLogin"
 import { useMessage } from "../../hooks/useMessage"
 import { PigImage } from "../atoms/images/PigImage"
 import { CreateInput } from "../atoms/inputs/CreateInput"
@@ -15,6 +16,7 @@ import { Food } from "../../type/Food"
 
 export const New: VFC = memo(() => {
   const [ createFood, setCreateFood ] = useState<Omit<Food, "id">>({ name: "", price: null, calorie: null, created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "", favorite: false })
+  const { login } = useLogin()
   const { showMessage } = useMessage()
 
   // バーコードから読み取った場合
@@ -41,27 +43,6 @@ export const New: VFC = memo(() => {
 
   // Foodを作成する
   const onClickCreateFood = () => {
-    // ログインする
-    liff.init({ liffId: process.env.REACT_APP_LIFF_ID_NEW as string })
-        .then(() => {
-          // ログインしていなかったらログインする
-          if (!liff.isLoggedIn()) {
-            liff.login()
-          }
-
-          const idToken = liff.getIDToken()
-          const params = new URLSearchParams()
-          params.append("idToken", idToken as string)
-          axios.post("/users", params)
-              .then(res => {
-                // IdTokenの有効期限が切れたらログアウトする
-                if (res.data.error_description === 'IdToken expired.') {
-                  liff.logout()
-                }
-              })
-              .catch(e => console.error(e))
-        })
-
     axios.post("/foods", {
             name: createFood.name,
             price: createFood.price,
@@ -86,6 +67,9 @@ export const New: VFC = memo(() => {
   const navigate = useNavigate()
   const onClickShowCalendar = useCallback(() => navigate("/calendar"), [navigate])
 
+  // ログインする
+  login({ liffId: process.env.REACT_APP_LIFF_ID_NEW as string })
+
   return (
     <Flex align="center" justify="center" height="100vh">
       <Stack spacing={5}>
@@ -105,11 +89,17 @@ export const New: VFC = memo(() => {
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.price || "" } onChange={ onChangePrice } placeholder="金額を入力" />
+          <InputGroup>
+            <CreateInput value={ createFood.price || "" } onChange={ onChangePrice } placeholder="金額を入力" />
+            <InputRightElement children="円" />
+          </InputGroup>
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.calorie || "" } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
+          <InputGroup>
+            <CreateInput value={ createFood.calorie || "" } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
+            <InputRightElement children="kcal" mr="2" />
+          </InputGroup>
         </FormControl>
 
         <FoodDetailAccordion createFood={ createFood } onChangeCreatedAt={ onChangeCreatedAt } onChangePlace={ onChangePlace } onChangeMemo={ onChangeMemo } />
