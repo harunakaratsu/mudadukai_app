@@ -10,26 +10,6 @@ class FoodsController < ApplicationController
     food = current_user.foods.new(food_params)
 
     if food.save
-      message = [
-        {
-          type: 'text',
-          text: '以下の内容で記録しました。'
-        },
-        {
-          type: 'text',
-          text: "名前： #{food.name}\n金額： #{food.price}円\nカロリー： #{food.calorie}kcal"
-        },
-        {
-          type: 'sticker',
-          packageId: 11537,
-          stickerId: 52002739
-        }
-      ]
-      client = Line::Bot::Client.new { |config|
-        config.channel_secret = ENV['LIFF_CHANNEL_SECRET']
-        config.channel_token = ENV['LIFF_CHANNEL_ACCESS_TOKEN']
-      }
-      response = client.push_message(current_user.line_user_id, message)
       render json: food, status: :created
     else
       render json: {}, status: :internal_server_error
