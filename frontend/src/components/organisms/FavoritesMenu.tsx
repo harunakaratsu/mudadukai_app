@@ -46,7 +46,7 @@ export const FavoritesMenu: VFC<Props> = memo((props) => {
 
   return (
     <Menu autoSelect={false}>
-      <MenuButton>
+      <MenuButton style={{ background: "white" }}>
         <HamburgerIcon />
       </MenuButton>
       <MenuList>

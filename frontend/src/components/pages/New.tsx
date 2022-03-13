@@ -89,11 +89,17 @@ export const New: VFC = memo(() => {
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.price || "" } onChange={ onChangePrice } placeholder="金額を入力" />
+          <InputGroup>
+            <CreateInput value={ createFood.price || "" } onChange={ onChangePrice } placeholder="金額を入力" />
+            <InputRightElement children="円" />
+          </InputGroup>
         </FormControl>
 
         <FormControl>
-          <CreateInput value={ createFood.calorie || "" } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
+          <InputGroup>
+            <CreateInput value={ createFood.calorie || "" } onChange={ onChangeCalorie } placeholder="カロリーを入力" />
+            <InputRightElement children="kcal" mr="2" />
+          </InputGroup>
         </FormControl>
 
         <FoodDetailAccordion createFood={ createFood } onChangeCreatedAt={ onChangeCreatedAt } onChangePlace={ onChangePlace } onChangeMemo={ onChangeMemo } />
