@@ -44,7 +44,10 @@ https://www.mirumiru-line.com
 - ユーザー特定機能(LINE API、axios)
 - カレンダー機能(FullCalendar)
 - 無駄遣いの一覧、作成、更新、削除機能(LIFF、axios)
+- 無駄遣いのお気に入り機能(LIFF、axios)
 - 無駄遣いの通知機能(whenever、messaging API)
+- Foodの名前入力のサジェスト機能(react-autosuggest)
+- バーコード読み取り機能(Quagga2)
 <br />
 
 # 使用技術
