@@ -7,15 +7,16 @@ import { PigBlackImage } from "../components/atoms/images/PigBlackImage"
 type Props = {
   food: {
     calorie: number
-  }
+  },
+  baseCalorie: number
 }
 
 export const usePigImages = (props: Props) => {
-  const { food } = props
+  const { food, baseCalorie } = props
   const [ pigImages, setPigImages ] = useState<any>()
 
   useEffect(() => {
-    const pigCount = Math.floor(food.calorie / 100)
+    const pigCount = Math.floor(food.calorie / baseCalorie)
     setPigImages(
       pigCount < 10 ? 
       pigCount === 0 ? 
@@ -23,7 +24,7 @@ export const usePigImages = (props: Props) => {
         : [...Array(pigCount)].map((pig, index) => <WrapItem key={index}><PigImage size={30} /></WrapItem>)
         : <PigBlackImage />
     )
-  }, [food.calorie])
+  }, [food.calorie, baseCalorie])
   
 
   return { pigImages }

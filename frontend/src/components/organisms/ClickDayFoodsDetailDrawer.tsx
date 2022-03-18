@@ -1,6 +1,6 @@
 import { memo, useEffect, useState, VFC, Dispatch, SetStateAction } from "react"
 import dayjs from "dayjs"
-import { Center, Drawer, DrawerBody, DrawerContent, FormControl, FormLabel, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
+import { Center, Drawer, DrawerBody, DrawerContent, FormControl, FormLabel, InputGroup, InputRightElement, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 
 import { Food } from "../../type/Food"
 import { usePigImages } from "../../hooks/usePigImages"
@@ -26,8 +26,8 @@ export const ClickDayFoodsDetailDrawer: VFC<Props> = memo((props) => {
     setFoodsCalorie(foods ? foods.map(food => food.calorie || 0).reduce((a, b) => a + b, 0) : 0)
   }, [foods])
 
-  const { pigImages } = usePigImages({ food: { calorie: foodsCalorie || 0 } })
-  const { bgColor } = useBgColor({ food: { price: foodsPrice || 0} })
+  const { pigImages } = usePigImages({ food: { calorie: foodsCalorie || 0 }, baseCalorie: 100 })
+  const { bgColor } = useBgColor({ food: { price: foodsPrice || 0 }, basePrice: 100 })
 
   return (
     <Drawer placement='bottom' onClose={onCloseDrawer} isOpen={isOpen} size="md" autoFocus={false}>
@@ -44,11 +44,17 @@ export const ClickDayFoodsDetailDrawer: VFC<Props> = memo((props) => {
               <Stack>
               <FormControl>
                 <FormLabel>使った金額</FormLabel>
-                <ReadOnlyInput value={ foodsPrice || 0 } />
+                <InputGroup>
+                  <ReadOnlyInput value={ foodsPrice || 0 } />
+                  <InputRightElement children="円" />
+                </InputGroup>
               </FormControl>
               <FormControl>
                 <FormLabel>摂取カロリー</FormLabel>
-                <ReadOnlyInput value={ foodsCalorie || 0 } />
+                <InputGroup>
+                  <ReadOnlyInput value={ foodsCalorie || 0 } />
+                  <InputRightElement children="kcal" mr="2" />
+                </InputGroup>
               </FormControl>
               </Stack>
             </TabPanel>
