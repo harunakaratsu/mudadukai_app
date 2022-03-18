@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, memo, SetStateAction, useState, VFC } from "react"
 import axios from "axios"
 import dayjs from "dayjs"
-import { Button, Center, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea } from "@chakra-ui/react"
+import { Button, Center, FormControl, FormLabel, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea } from "@chakra-ui/react"
 
 import { Food } from "../../type/Food"
 import { usePigImages } from "../../hooks/usePigImages"
@@ -73,8 +73,8 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           .catch(e => console.error(e))
   }
 
-  const { bgColor } = useBgColor({ food: { price: foodPrice || 0 } })
-  const { pigImages } = usePigImages({ food: { calorie: foodCalorie || 0 } })
+  const { bgColor } = useBgColor({ food: { price: foodPrice || 0 }, basePrice: 100 })
+  const { pigImages } = usePigImages({ food: { calorie: foodCalorie || 0 }, baseCalorie: 100 })
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size="full">
@@ -93,11 +93,17 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           <Stack>
             <FormControl>
               <FormLabel>価格</FormLabel>
-              <ModalInput value={ foodPrice || 0 } onChange={ onChangeFoodPrice } />
+              <InputGroup>
+                <ModalInput value={ foodPrice || 0 } onChange={ onChangeFoodPrice } />
+                <InputRightElement children="円" />
+              </InputGroup>
             </FormControl>
             <FormControl>
               <FormLabel>カロリー</FormLabel>
-              <ModalInput value={ foodCalorie || 0 } onChange={ onChangeFoodCalorie } />
+              <InputGroup>
+                <ModalInput value={ foodCalorie || 0 } onChange={ onChangeFoodCalorie } />
+                <InputRightElement children="kcal" mr="2" />
+              </InputGroup>
             </FormControl>
             <FormControl>
               <FormLabel>購入日時</FormLabel>
