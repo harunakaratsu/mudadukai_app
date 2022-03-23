@@ -7,7 +7,7 @@ import { App } from './App'
 import './style.scss'
 
 liff
-  .init({ liffId: '1656846982-7ZQ88gXQ' })
+  .init({ liffId: '1656846982-lLZ55apZ' })
   .then(() => {
     // ログインしていなかったらログインする
     if (!liff.isLoggedIn()) {
