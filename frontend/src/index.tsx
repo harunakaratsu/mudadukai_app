@@ -18,7 +18,7 @@ liff
     const params = new URLSearchParams()
     params.append('idToken', idToken as string)
     axios
-      .post('http:localhost:3001/users', params)
+      .post('/users', params)
       .then(res => {
         // IdTokenの有効期限が切れたらログアウトする
         if (res.data.error_description === 'IdToken expired.') {
