@@ -1,7 +1,7 @@
-import { memo, useEffect, VFC } from "react"
-import { useNavigate } from "react-router-dom"
-import Quagga, { QuaggaJSResultObject } from "@ericblade/quagga2"
-import axios from "axios"
+import { memo, useEffect, VFC } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Quagga, { QuaggaJSResultObject } from '@ericblade/quagga2'
+import axios from 'axios'
 
 export const Scanner: VFC = memo(() => {
   const navigate = useNavigate()
@@ -9,18 +9,18 @@ export const Scanner: VFC = memo(() => {
   const onDetected = (result: string | null) => {
     Quagga.stop()
     // 名前と金額を取得する
-    axios.post("/search_name_and_price", { jan_code: result })
+    axios.post('/search_name_and_price', { jan_code: result })
          .then((res) => {
            const name = res.data.name
            const price = res.data.price
            const amount = res.data.amount
            
            // カロリーを取得する
-           axios.post("/search_calorie", { search_name: name, amount: amount })
+           axios.post('/search_calorie', { search_name: name, amount: amount })
                 .then(res => {
                   const calorie = res.data.calorie
                   // 入力画面に移動する
-                  navigate("/new", { 
+                  navigate('/new', { 
                     state: { 
                       name: name,
                       price: price,
@@ -40,14 +40,14 @@ export const Scanner: VFC = memo(() => {
   useEffect(() => {
     Quagga.init({
       inputStream: {
-        name: "Live",
-        type: "LiveStream"
+        name: 'Live',
+        type: 'LiveStream'
       },
       locator: {
         halfSample: true
       },
       decoder: {
-        readers: ["ean_reader"],
+        readers: ['ean_reader'],
         multiple: false
       }
     }, (err) => {
@@ -61,6 +61,6 @@ export const Scanner: VFC = memo(() => {
   })
 
   return (
-    <div id="interactive" className="viewport"  />
+    <div id='interactive' className='viewport'  />
   )
 })

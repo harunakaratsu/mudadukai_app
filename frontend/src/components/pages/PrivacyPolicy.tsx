@@ -1,11 +1,11 @@
-import { memo, VFC } from "react"
-import { Flex, Heading, Link, ListItem, OrderedList, Stack, Text } from "@chakra-ui/react"
+import { memo, VFC } from 'react'
+import { Flex, Heading, Link, ListItem, OrderedList, Stack, Text } from '@chakra-ui/react'
 
 export const PrivacyPolicy:VFC = memo(() => {
   return (
-    <Flex align="center" px={{ base: 5, md: 20 }}>
+    <Flex align='center' px={{ base: 5, md: 20 }}>
       <Stack spacing={8}>
-        <Heading as="h1" size="lg" textAlign="center" pt={10}>
+        <Heading as='h1' size='lg' textAlign='center' pt={10}>
           プライバシーポリシー
         </Heading>
         <Text>
@@ -168,7 +168,7 @@ export const PrivacyPolicy:VFC = memo(() => {
         </Heading>
         <Text pb={5}>
           本ポリシーに関するお問い合わせは，
-          <Link href="https://docs.google.com/forms/d/e/1FAIpQLScqyZMJqHjK1nLYrVGp7MxHXwxZRzj-MunGWwOFES6bYQNUoA/viewform" color='teal.500'>
+          <Link href='https://docs.google.com/forms/d/e/1FAIpQLScqyZMJqHjK1nLYrVGp7MxHXwxZRzj-MunGWwOFES6bYQNUoA/viewform' color='teal.500'>
             こちら
           </Link>
           までお願いいたします。

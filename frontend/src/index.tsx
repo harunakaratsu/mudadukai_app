@@ -7,7 +7,7 @@ import { App } from './App'
 import './style.scss'
 
 liff
-  .init({ liffId: '1656846982-lLZ55apZ' })
+  .init({ liffId: '1656846982-7ZQ88gXQ' })
   .then(() => {
     // ログインしていなかったらログインする
     if (!liff.isLoggedIn()) {
@@ -18,7 +18,7 @@ liff
     const params = new URLSearchParams()
     params.append('idToken', idToken as string)
     axios
-      .post('/users', params)
+      .post('http:localhost:3001/users', params)
       .then(res => {
         // IdTokenの有効期限が切れたらログアウトする
         if (res.data.error_description === 'IdToken expired.') {
