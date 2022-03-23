@@ -7,7 +7,7 @@ import { App } from './App'
 import './style.scss'
 
 liff
-  .init({ liffId: process.env.REACT_APP_LIFF_ID as string })
+  .init({ liffId: '1656846982-lLZ55apZ' })
   .then(() => {
     // ログインしていなかったらログインする
     if (!liff.isLoggedIn()) {
