@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useCallback } from 'react'
 
 type Props = {
   food: {
@@ -7,17 +7,18 @@ type Props = {
   basePrice: number
 }
 
-export const useBgColor = (props: Props) => {
-  const { food, basePrice } = props
-  const [ bgColor, setBgColor ] = useState("white")
+export const useBgColor = () => {
+  const bgColor = useCallback((props: Props) => {
+    const { food, basePrice } = props
 
-  useEffect(() => {
-    setBgColor(
-    food.price < basePrice ? "white" :
-    ( food.price >= basePrice && food.price < basePrice*3 ) ? "red.50" :
-    ( food.price >= basePrice*3 && food.price < basePrice*5 ) ? "red.100" :
-    ( food.price >= basePrice*5 && food.price < basePrice*10 ) ? "red.300" : "red.500")
-  }, [food.price, basePrice])
+    return (
+      food.price < basePrice
+      ? 'white' : food.price < basePrice * 3
+      ? 'red.50' : food.price < basePrice * 5
+      ? 'red.100' : food.price < basePrice * 10 
+      ? 'red.300' : 'red.500'
+    )
+  }, [])
 
   return { bgColor }
 }

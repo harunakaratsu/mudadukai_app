@@ -10,10 +10,10 @@ class SearchesController < ApplicationController
     html = URI.open(uri).read
     doc = Nokogiri::HTML.parse(html)
 
-    name = doc.css('h5#gname').inner_text.gsub(/[\r\n]| |　/, '')
+    name = doc.css('h5#gname').inner_text.strip
     doc.search(:span).map(&:remove)
     price = doc.xpath('//td[@colspan="9"]').inner_text.gsub(/[\r\n]| |　|平均|：|\\/, '')
-    amount = doc.xpath('//td[@class="goodsval"][@colspan="2"]')[3].text
+    amount = doc.xpath('//td[@class="goodsval"][@colspan="2"]')[3].text.strip
 
     if doc.title != ' 商品紹介ページ'
       # priceの値が空の場合、yahooのapiで検索し直す
@@ -38,9 +38,7 @@ class SearchesController < ApplicationController
     doc.search(:a).map(&:remove)
 
     if doc.at_xpath('//div[@class="smallText greyText greyLink"]')
-      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]')
-               .text.gsub(/[\r\n]| |　|\t/, '')
-               .sub(/kcal.*/m, '')
+      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]').text.strip.sub(/kcal.*/m, '')
       remove_str = str.slice(str.split('').index { |b| b == '1' }..str.split('').index { |b| b == ':' })
       calorie = str.gsub(remove_str, '')
       amount = params[:amount]

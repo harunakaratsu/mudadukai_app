@@ -1,12 +1,12 @@
-import { BaseSyntheticEvent, Dispatch, memo, SetStateAction, useState, VFC } from "react"
+import { BaseSyntheticEvent, Dispatch, memo, SetStateAction, useState, VFC } from 'react'
 import Autosuggest from 'react-autosuggest'
 
-import { useFoods } from "../../hooks/useFoods"
-import { Food } from "../../type/Food"
+import { useFoods } from '../../hooks/useFoods'
+import { Food } from '../../type/Food'
 
 type Props = {
-  createFood: Omit<Food, "id">
-  setCreateFood: Dispatch<SetStateAction<Omit<Food, "id">>>
+  createFood: Omit<Food, 'id'>
+  setCreateFood: Dispatch<SetStateAction<Omit<Food, 'id'>>>
 }
 
 export const Suggest: VFC<Props> = memo((props) => {
@@ -16,8 +16,8 @@ export const Suggest: VFC<Props> = memo((props) => {
 
   // カタカナをひらがなに変換する
   const kanaToHira = (str: string) => {
-    return str.replace(/[\u30A1-\u30FA]/g, ch =>
-      String.fromCharCode(ch.charCodeAt(0) - 0x60)
+    return (
+      str.replace(/[\u30A1-\u30FA]/g, ch => String.fromCharCode(ch.charCodeAt(0) - 0x60))
     )
   }
 
@@ -26,7 +26,13 @@ export const Suggest: VFC<Props> = memo((props) => {
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
   
-    return inputLength === 0 ? [] : foods.filter(food => kanaToHira(food.name.toLowerCase()).slice(0, inputLength) === inputValue)
+    return (
+      inputLength === 0
+      ? []
+      : foods.filter(food => (
+          kanaToHira(food.name.toLowerCase()).slice(0, inputLength) === inputValue
+        ))
+    )
   }
 
   // サジェストの結果を選んだ際にテキストボックスに表示されるテキスト
@@ -59,7 +65,7 @@ export const Suggest: VFC<Props> = memo((props) => {
   const onSuggestionsClearRequested = () => setSuggestions([])
 
   const inputProps = {
-    placeholder: "名前を入力",
+    placeholder: '名前を入力',
     value: createFood.name,
     onChange
   }
