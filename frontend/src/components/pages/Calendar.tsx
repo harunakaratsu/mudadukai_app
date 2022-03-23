@@ -8,7 +8,6 @@ import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction"
 import allLocales from '@fullcalendar/core/locales-all'
 
 import { Food } from "../../type/Food"
-import { useLogin } from "../../hooks/useLogin"
 import { useFoods } from "../../hooks/useFoods"
 import { usePigImages } from "../../hooks/usePigImages"
 import { useBgColor } from "../../hooks/useBgColor"
@@ -21,7 +20,6 @@ export const Calendar: VFC = memo(() => {
   const [ currentYearMonth, setCurrentYearMonth ] = useState("")
   const [ currentYearMonthFoods, setCurrentYearMonthFoods ] = useState({ price: 0, calorie: 0 })
 
-  const { login } = useLogin()
   const { foods, setFoods } = useFoods()
   const { isOpen, onClose, onOpen } = useDisclosure()
 
@@ -52,9 +50,6 @@ export const Calendar: VFC = memo(() => {
     setClickDay(dayjs(arg.dateStr).format("D"))
     onOpen()
   }, [onOpen, foods])
-
-  // ログインする
-  login({ liffId: process.env.REACT_APP_LIFF_ID_CALENDAR as string })
 
   return (
     <>

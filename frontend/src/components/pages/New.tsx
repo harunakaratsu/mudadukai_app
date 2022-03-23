@@ -8,7 +8,6 @@ import { Button, Center, Flex, FormControl, FormLabel, InputGroup, InputRightEle
 import { FoodDetailAccordion } from "../organisms/FoodDetailAccordion"
 import { FavoritesMenu } from "../organisms/FavoritesMenu"
 import { Suggest } from "../organisms/Suggest"
-import { useLogin } from "../../hooks/useLogin"
 import { useMessage } from "../../hooks/useMessage"
 import { PigImage } from "../atoms/images/PigImage"
 import { CreateInput } from "../atoms/inputs/CreateInput"
@@ -16,7 +15,6 @@ import { Food } from "../../type/Food"
 
 export const New: VFC = memo(() => {
   const [ createFood, setCreateFood ] = useState<Omit<Food, "id">>({ name: "", price: null, calorie: null, created_at: dayjs().format("YYYY-MM-DD"), place: "", memo: "", favorite: false })
-  const { login } = useLogin()
   const { showMessage } = useMessage()
 
   // バーコードから読み取った場合
@@ -66,9 +64,6 @@ export const New: VFC = memo(() => {
   // カレンダーへ移動する
   const navigate = useNavigate()
   const onClickShowCalendar = useCallback(() => navigate("/calendar"), [navigate])
-
-  // ログインする
-  login({ liffId: process.env.REACT_APP_LIFF_ID_NEW as string })
 
   return (
     <Flex align="center" justify="center" height="100vh">
