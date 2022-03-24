@@ -45,27 +45,40 @@ export const FavoritesMenu: VFC<Props> = memo((props) => {
       })
   }
 
+  const menuItem = () => {
+    if (favoriteFoods) {
+      return (
+        favoriteFoods.map(favoriteFood => (
+          <Flex key={ favoriteFood.id }>
+            <MenuItem
+              w='80%'
+              ml={1}
+              className='favorite'
+              onClick={ () => onClickFavorite(favoriteFood) }
+            >
+              { favoriteFood.name }
+            </MenuItem>
+            <MenuItem  w='15%' className='favorite'>
+              <SmallCloseIcon color='gray' onClick={ () => onClickDeleteFavorite(favoriteFood)} />
+            </MenuItem>
+          </Flex>
+        ))
+      )
+    } else {
+      return (
+        <MenuItem ml={1} className='favorite'>登録されていません</MenuItem>
+      )
+    }
+  }
+
   return (
     <Menu autoSelect={false}>
-      <MenuButton style={{ background: 'white' }}>
+      <MenuButton>
         <HamburgerIcon />
       </MenuButton>
-      <MenuList>
+      <MenuList maxW='200px'>
         <MenuGroup title='お気に入りから記録する'>
-          { 
-            favoriteFoods.length === 0
-            ? <MenuItem ml={1} _hover={{ bg: 'white' }}>登録されていません</MenuItem>
-            : favoriteFoods.map(favoriteFood => (
-                <Flex key={ favoriteFood.id }>
-                  <MenuItem w='80%' ml={1} onClick={ () => onClickFavorite(favoriteFood) } _hover={{ bg: 'white' }}>
-                    { favoriteFood.name }
-                  </MenuItem>
-                  <MenuItem _hover={{ bg: 'white', cursor: 'pointer' }}>
-                    <SmallCloseIcon color='gray' onClick={ () => onClickDeleteFavorite(favoriteFood)} />
-                  </MenuItem>
-                </Flex>
-              )) 
-          }
+          { menuItem() }
         </MenuGroup>
       </MenuList>
     </Menu>

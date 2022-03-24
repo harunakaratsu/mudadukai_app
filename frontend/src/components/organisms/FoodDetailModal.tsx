@@ -78,7 +78,7 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size='full'>
+    <Modal isOpen={isOpen} onClose={onClose} autoFocus={false} size='sm'>
       <ModalOverlay />
       <ModalContent bg={ bgColor({ food: { price: foodPrice || 0 }, basePrice: 100 }) }>
         <ModalHeader textAlign='center'>
