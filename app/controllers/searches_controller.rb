@@ -12,8 +12,13 @@ class SearchesController < ApplicationController
 
     name = doc.css('h5#gname').inner_text.strip
     doc.search(:span).map(&:remove)
-    price = doc.xpath('//td[@colspan="9"]').inner_text.gsub(/[\r\n]| |　|平均|：|\\/, '')
+    company = doc.xpath('//td[@class="goodsval"][@colspan="2"]')[2].text.strip.gsub(/日本/, '')
     amount = doc.xpath('//td[@class="goodsval"][@colspan="2"]')[3].text.strip
+    price = doc.xpath('//td[@class="goodsval"][@colspan="2"]')[4].text.strip.gsub(/\\/, '')
+    # 定価の表示がなかったら平均価格を代入する
+    if price === ''
+      price = doc.xpath('//td[@colspan="9"]').inner_text.gsub(/[\r\n]| |　|平均|：|\\/, '')
+    end
 
     if doc.title != ' 商品紹介ページ'
       # priceの値が空の場合、yahooのapiで検索し直す
@@ -24,21 +29,21 @@ class SearchesController < ApplicationController
         price = food[0] && food[0]['price']
       end
 
-      render json: { name: name, price: price, amount: amount }
+      render json: { name: name, price: price, amount: amount, company: company }
     else
       render json: {}
     end
   end
 
   def search_calorie
-    name = URI.encode_www_form({ 'q': params[:search_name] })
+    name = URI.encode_www_form({ 'q': params[:search_word] })
     uri = URI.parse("https://www.fatsecret.jp/%E3%82%AB%E3%83%AD%E3%83%AA%E3%83%BC-%E6%A0%84%E9%A4%8A/search?#{name}")
     html = URI.open(uri).read
     doc = Nokogiri::HTML.parse(html)
     doc.search(:a).map(&:remove)
 
     if doc.at_xpath('//div[@class="smallText greyText greyLink"]')
-      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]').text.strip.sub(/kcal.*/m, '')
+      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]').text.gsub(/[\r\n]| |　/, '').sub(/kcal.*/m, '')
       remove_str = str.slice(str.split('').index { |b| b == '1' }..str.split('').index { |b| b == ':' })
       calorie = str.gsub(remove_str, '')
       amount = params[:amount]
@@ -58,6 +63,6 @@ class SearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:search).permit(:jan_code, :search_name, :amount)
+    params.require(:search).permit(:jan_code, :search_word, :amount)
   end
 end

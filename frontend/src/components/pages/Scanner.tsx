@@ -12,11 +12,13 @@ export const Scanner: VFC = memo(() => {
     axios.post('/search_name_and_price', { jan_code: result })
          .then((res) => {
            const name = res.data.name
+           const company = res.data.company
+           const search_word = `${company} ${name}`
            const price = res.data.price
            const amount = res.data.amount
            
            // カロリーを取得する
-           axios.post('/search_calorie', { search_name: name, amount: amount })
+           axios.post('/search_calorie', { search_word: search_word, amount: amount })
                 .then(res => {
                   const calorie = res.data.calorie
                   // 入力画面に移動する
