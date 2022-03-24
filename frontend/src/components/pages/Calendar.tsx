@@ -45,7 +45,7 @@ export const Calendar: VFC = memo(() => {
         dayjs(food.created_at).format('YYYY-MM-DD') === dayjs(arg.event.startStr).format('YYYY-MM-DD')
       ))
     )
-    setClickDay(dayjs(foods[0].created_at).format('D'))
+    setClickDay(dayjs(arg.event.startStr).format('D'))
     onOpen()
   }, [onOpen, foods])
 
