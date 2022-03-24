@@ -74,8 +74,7 @@ export const Suggest: VFC<Props> = memo((props) => {
   const inputProps = {
     placeholder: '名前を入力',
     value: createFood.name,
-    onChange,
-    width: '80%'
+    onChange
   }
 
   return (
