@@ -11,8 +11,8 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={ <Top /> } />
-        <Route path='/calendar' element={ <Calendar /> } />
+        <Route path='/top' element={ <Top /> } />
+        <Route path='/' element={ <Calendar /> } />
         <Route path='/new' element={ <New /> } />
         <Route path='/new/scanner' element={ <Scanner /> } />
         <Route path='/use' element={ <Use /> } />
