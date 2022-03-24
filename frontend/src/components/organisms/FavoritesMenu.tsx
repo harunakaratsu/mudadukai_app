@@ -46,7 +46,7 @@ export const FavoritesMenu: VFC<Props> = memo((props) => {
   }
 
   const menuItem = () => {
-    if (favoriteFoods) {
+    if (favoriteFoods.length) {
       return (
         favoriteFoods.map(favoriteFood => (
           <Flex key={ favoriteFood.id }>

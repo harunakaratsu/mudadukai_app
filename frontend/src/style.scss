@@ -91,12 +91,12 @@ body {
 // サジェスト機能
 .react-autosuggest__container {
   position: relative;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
 }
 
 .react-autosuggest__input {
   padding: 8px 16px;
-  border: 1px solid #E2E8F0;
-  border-radius: 4px;
 }
 
 .react-autosuggest__input--focused {
