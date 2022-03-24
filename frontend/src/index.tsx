@@ -6,32 +6,42 @@ import axios from 'axios'
 import { App } from './App'
 import './style.scss'
 
-liff
-  .init({ liffId: '1656846982-lLZ55apZ' })
-  .then(() => {
-    // ログインしていなかったらログインする
-    if (!liff.isLoggedIn()) {
-      liff.login()
-    }
+// pathがnewかcalendarならログインする
+if (window.location.pathname === '/new' || window.location.pathname === '/calendar') {
+  liff
+    .init({ liffId: '1656846982-lLZ55apZ' })
+    .then(() => {
+      // ログインしていなかったらログインする
+      if (!liff.isLoggedIn()) {
+        liff.login()
+      }
 
-    const idToken = liff.getIDToken()
-    const params = new URLSearchParams()
-    params.append('idToken', idToken as string)
-    axios
-      .post('/users', params)
-      .then(res => {
-        // IdTokenの有効期限が切れたらログアウトする
-        if (res.data.error_description === 'IdToken expired.') {
-          liff.logout()
-        }
-      })
-      .then(() => {
-        ReactDOM.render(
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>,
-          document.getElementById('root')
-        )
-      })
-      .catch(e => console.error(e))
-  })
+      const idToken = liff.getIDToken()
+      const params = new URLSearchParams()
+      params.append('idToken', idToken as string)
+      axios
+        .post('/users', params)
+        .then(res => {
+          // IdTokenの有効期限が切れたらログアウトする
+          if (res.data.error_description === 'IdToken expired.') {
+            liff.logout()
+          }
+        })
+        .then(() => {
+          ReactDOM.render(
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+          )
+        })
+        .catch(e => console.error(e))
+    })
+} else {
+  ReactDOM.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+}
