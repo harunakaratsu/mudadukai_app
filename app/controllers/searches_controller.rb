@@ -43,7 +43,7 @@ class SearchesController < ApplicationController
     doc.search(:a).map(&:remove)
 
     if doc.at_xpath('//div[@class="smallText greyText greyLink"]')
-      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]').text.gsub(/[\r\n]| |　/, '').sub(/kcal.*/m, '')
+      str = doc.at_xpath('//div[@class="smallText greyText greyLink"]').text.gsub(/[\r\n]| |　|\t/, '').sub(/kcal.*/m, '')
       remove_str = str.slice(str.split('').index { |b| b == '1' }..str.split('').index { |b| b == ':' })
       calorie = str.gsub(remove_str, '')
       amount = params[:amount]
