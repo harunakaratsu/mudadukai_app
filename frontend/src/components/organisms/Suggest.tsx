@@ -25,14 +25,21 @@ export const Suggest: VFC<Props> = memo((props) => {
   const getSuggestions = (value: string) => {
     const inputValue = value.trim().toLowerCase()
     const inputLength = inputValue.length
-  
-    return (
-      inputLength === 0
-      ? []
-      : foods.filter(food => (
-          kanaToHira(food.name.toLowerCase()).slice(0, inputLength) === inputValue
-        ))
-    )
+
+    if (inputLength) {
+      const arr = foods.filter(food => (
+        kanaToHira(food.name.toLowerCase()).slice(0, inputLength) === inputValue
+      ))
+      const result = arr.filter((food, index, self) => {
+        // nameだけをリスト化する
+        const nameList = self.map(food => food.name)
+        // 重複を削除する
+        if (nameList.indexOf(food.name) === index) {
+          return food
+        }
+      })
+      return result
+    } else return []
   }
 
   // サジェストの結果を選んだ際にテキストボックスに表示されるテキスト
@@ -67,7 +74,8 @@ export const Suggest: VFC<Props> = memo((props) => {
   const inputProps = {
     placeholder: '名前を入力',
     value: createFood.name,
-    onChange
+    onChange,
+    width: '80%'
   }
 
   return (
