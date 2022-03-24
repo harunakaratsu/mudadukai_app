@@ -7,7 +7,7 @@ import { App } from './App'
 import './style.scss'
 
 // pathがnewかcalendarならログインする
-if (window.location.pathname === '/new' || window.location.pathname === '/calendar') {
+if (window.location.pathname === '/new' || window.location.pathname === '/') {
   liff
     .init({ liffId: '1656846982-lLZ55apZ' })
     .then(() => {
