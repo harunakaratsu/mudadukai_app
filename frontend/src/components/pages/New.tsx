@@ -79,7 +79,7 @@ export const New: VFC = memo(() => {
 
   // カレンダーへ移動する
   const navigate = useNavigate()
-  const onClickShowCalendar = useCallback(() => navigate('/'), [navigate])
+  const onClickShowCalendar = useCallback(() => navigate('/line/calendar'), [navigate])
 
   return (
     <Flex align='center' justify='center' height='100vh'>
