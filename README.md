@@ -17,7 +17,7 @@
 
 # アプリのURL
 
-https://www.mirumiru-line.com/top
+https://www.mirumiru-line.com
 <br />
 
 # このアプリについて
