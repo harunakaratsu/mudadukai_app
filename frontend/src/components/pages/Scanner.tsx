@@ -22,7 +22,7 @@ export const Scanner: VFC = memo(() => {
                 .then(res => {
                   const calorie = res.data.calorie
                   // 入力画面に移動する
-                  navigate('/line/new', { 
+                  navigate('/new', { 
                     state: { 
                       name: name,
                       price: price,
