@@ -11,10 +11,10 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={ <Top /> } />
-        <Route path='/line/calendar' element={ <Calendar /> } />
-        <Route path='/line/new' element={ <New /> } />
-        <Route path='/line/scanner' element={ <Scanner /> } />
+        <Route path='/top' element={ <Top /> } />
+        <Route path='/' element={ <Calendar /> } />
+        <Route path='/new' element={ <New /> } />
+        <Route path='/new/scanner' element={ <Scanner /> } />
         <Route path='/use' element={ <Use /> } />
         <Route path='/terms' element={ <Terms /> } />
         <Route path='/privacy_policy' element={ <PrivacyPolicy /> } />

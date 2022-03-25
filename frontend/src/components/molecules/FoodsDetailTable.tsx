@@ -17,7 +17,7 @@ export const FoodsDetailTable: VFC<Props> = memo((props) => {
 
   // 入力画面へ移動
   const navigate = useNavigate()
-  const onClickAddFood = useCallback(() => navigate('/line/new'), [navigate])
+  const onClickAddFood = useCallback(() => navigate('/new'), [navigate])
 
   return (
     <Table variant='simple'>

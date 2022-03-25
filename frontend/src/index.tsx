@@ -7,7 +7,7 @@ import { App } from './App'
 import './style.scss'
 
 // pathがnewかcalendarならログインする
-const requireLoginPath = [ '/line/calendar', '/line/new', '/line/scanner' ]
+const requireLoginPath = [ '/', '/new', '/new/scanner' ]
 if (requireLoginPath.includes(window.location.pathname)) {
   liff
     .init({ liffId: '1656846982-lLZ55apZ' })
