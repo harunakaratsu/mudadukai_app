@@ -6,5 +6,7 @@ export type Food = {
   created_at: string,
   place: string,
   memo: string,
-  favorite: boolean
+  favorite: boolean,
+  amount: number | null,
+  unit: string
 }

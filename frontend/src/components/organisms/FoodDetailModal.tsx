@@ -31,6 +31,8 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   const [ foodCreatedAt, setFoodCreatedAt ] = useState(food.created_at)
   const [ foodPlace, setFoodPlace ] = useState(food.place)
   const [ foodMemo, setFoodMemo ] = useState(food.memo)
+  const [ foodAmount, setFoodAmount ] = useState(food.amount)
+  const [ foodUnit, setFoodUnit ] = useState(food.unit)
 
   const onChangeFoodName = (e: ChangeEvent<HTMLInputElement>) => setFoodName(e.target.value)
   const onChangeFoodPrice = (e: ChangeEvent<HTMLInputElement>) => setFoodPrice(Number(e.target.value))
@@ -38,6 +40,8 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
   const onChangeFoodCreatedAt = (e: ChangeEvent<HTMLInputElement>) => setFoodCreatedAt(e.target.value)
   const onChangeFoodPlace = (e: ChangeEvent<HTMLInputElement>) => setFoodPlace(e.target.value)
   const onChangeFoodMemo = (e: ChangeEvent<HTMLTextAreaElement>) => setFoodMemo(e.target.value)
+  const onChangeFoodAmount = (e: ChangeEvent<HTMLInputElement>) => setFoodAmount(Number(e.target.value))
+  const onChangeFoodUnit = (e: ChangeEvent<HTMLInputElement>) => setFoodUnit(e.target.value)
 
   // Foodを編集する
   const onClickUpdate = () => {
@@ -48,7 +52,9 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
           calorie: foodCalorie,
           created_at: foodCreatedAt,
           place: foodPlace,
-          memo: foodMemo
+          memo: foodMemo,
+          amount: foodAmount,
+          unit: foodUnit
       })
       .then((res) => {
         const newFoods = [...foods]
@@ -97,28 +103,67 @@ export const FoodDetailModal: VFC<Props> = memo((props) => {
             <FormControl>
               <FormLabel>価格</FormLabel>
               <InputGroup>
-                <ModalInput value={ foodPrice || 0 } onChange={ onChangeFoodPrice } />
+                <ModalInput
+                  value={ foodPrice || 0 }
+                  onChange={ onChangeFoodPrice }
+                />
                 <InputRightElement children='円' />
               </InputGroup>
             </FormControl>
+
             <FormControl>
               <FormLabel>カロリー</FormLabel>
               <InputGroup>
-                <ModalInput value={ foodCalorie || 0 } onChange={ onChangeFoodCalorie } />
+                <ModalInput
+                  value={ foodCalorie || 0 }
+                  onChange={ onChangeFoodCalorie } 
+                />
                 <InputRightElement children='kcal' mr='2' />
               </InputGroup>
             </FormControl>
+
+            <FormControl>
+              <FormLabel>分量と単位</FormLabel>
+              <InputGroup>
+                <ModalInput
+                  value={ foodAmount || '' }
+                  onChange={ onChangeFoodAmount }
+                />
+                <InputRightElement width='4em'>
+                  <ModalInput
+                    value={ foodUnit }
+                    onChange={ onChangeFoodUnit }
+                    style={{ textAlign: 'center' }}
+                  />
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+
             <FormControl>
               <FormLabel>購入日時</FormLabel>
-              <ModalInput value={ dayjs(foodCreatedAt).format('YYYY-MM-DD') } onChange={ onChangeFoodCreatedAt } type='date' />
+              <ModalInput
+                value={ dayjs(foodCreatedAt).format('YYYY-MM-DD') }
+                onChange={ onChangeFoodCreatedAt }
+                type='date'
+              />
             </FormControl>
+
             <FormControl>
               <FormLabel>購入場所</FormLabel>
-              <ModalInput value={ foodPlace } onChange={ onChangeFoodPlace } />
+              <ModalInput
+                value={ foodPlace }
+                onChange={ onChangeFoodPlace }
+              />
             </FormControl>
+
             <FormControl>
               <FormLabel>メモ</FormLabel>
-              <Textarea value={ foodMemo } onChange={ onChangeFoodMemo } bg='white' _focus={{ boxShadow: 'none'}} />
+              <Textarea
+                value={ foodMemo }
+                onChange={ onChangeFoodMemo }
+                bg='white'
+                _focus={{ boxShadow: 'none'}}
+                />
             </FormControl>
 
             <ModalFooter px={0} py={5}>

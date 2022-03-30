@@ -18,15 +18,19 @@ export const Scanner: VFC = memo(() => {
            const amount = res.data.amount
            
            // カロリーを取得する
-           axios.post('/search_calorie', { search_word: search_word, amount: amount })
+           axios.post('/search_calorie', { search_word: search_word, amount: amount, jan_code: result })
                 .then(res => {
                   const calorie = res.data.calorie
+                  const newAmount = amount && Number(amount.split(' ')[1])
+                  const unit = amount && amount.split(' ')[2]
                   // 入力画面に移動する
                   navigate('/new', { 
                     state: { 
                       name: name,
                       price: price,
-                      calorie: calorie
+                      calorie: calorie,
+                      amount: newAmount,
+                      unit: unit
                     } 
                   })
                 })

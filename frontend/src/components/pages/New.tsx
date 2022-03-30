@@ -12,6 +12,7 @@ import { useMessage } from '../../hooks/useMessage'
 import { PigImage } from '../atoms/images/PigImage'
 import { CreateInput } from '../atoms/inputs/CreateInput'
 import { Food } from '../../type/Food'
+import { State } from '../../type/State'
 
 export const New: VFC = memo(() => {
   const initialValue = {
@@ -21,50 +22,72 @@ export const New: VFC = memo(() => {
     created_at: dayjs().format('YYYY-MM-DD'),
     place: '',
     memo: '',
-    favorite: false
+    favorite: false,
+    amount: null,
+    unit: ''
   }
   const [ createFood, setCreateFood ] = useState<Omit<Food, 'id'>>(initialValue)
+  const [ amountEaten, setAmountEaten ] = useState<number | null>()
   const { showMessage } = useMessage()
 
   // バーコードから読み取った場合
   const location = useLocation()
-  const state = location.state as { name: string, price: number, calorie: number }
+  const state = location.state as State
   useEffect(() => {
     if (state) {
-      setCreateFood({ ...createFood, name: state.name, price: state.price, calorie: state.calorie })
       if (!state.name) {
-        showMessage({ status: 'error', title: '情報の読み取りに失敗しました' })
+        showMessage({ status: 'error', title: '名前の読み取りに失敗しました' })
+        state.name = ''
       }
       if (!state.price) {
         showMessage({ status: 'error', title: '金額の読み取りに失敗しました' })
+        state.price = null
       }
       if (!state.calorie) {
         showMessage({ status: 'error', title: 'カロリーの読み取りに失敗しました' })
+        state.calorie = null
       }
+      if (!state.amount || !state.unit) {
+        showMessage({ status: 'error', title: '分量の読み取りに失敗しました' })
+        state.amount = null
+        state.unit = ''
+      }
+      setCreateFood({
+        ...createFood,
+        name: state.name,
+        price: state.price,
+        calorie: state.calorie,
+        amount: state.amount,
+        unit: state.unit
+      })
+      setAmountEaten(100)
     }
-  }, [])
+  }, [showMessage, state])
 
   const onChangePrice = useCallback((e) => setCreateFood({...createFood, price: e.target.value}), [createFood])
   const onChangeCalorie = useCallback((e) => setCreateFood({...createFood, calorie: e.target.value}), [createFood])
-  const onChangeCreatedAt = useCallback((e) => setCreateFood({...createFood, created_at: e.target.value}), [createFood])
-  const onChangePlace = useCallback((e) => setCreateFood({...createFood, place: e.target.value}), [createFood])
-  const onChangeMemo = useCallback((e) => setCreateFood({...createFood, memo: e.target.value}), [createFood])
   const onChangeFavorite = useCallback((e) => setCreateFood({...createFood, favorite: e.target.checked}), [createFood])
 
   // 入力欄をリセットする
-  const resetInput = () => setCreateFood(initialValue)
+  const resetInput = () => {
+    setCreateFood(initialValue)
+    setAmountEaten(null)
+  }
 
   // Foodを作成する
+  const val = (amountEaten ?? 100) / 100
   const onClickCreateFood = () => {
     axios
       .post('/foods', {
         name: createFood.name,
-        price: createFood.price,
-        calorie: createFood.calorie,
+        price: Math.round((createFood.price ?? 0) * val),
+        calorie: Math.round((createFood.calorie ?? 0) * val),
         created_at: createFood.created_at,
         place: createFood.place,
         memo: createFood.memo,
-        favorite: createFood.favorite
+        favorite: createFood.favorite,
+        amount: Math.round((createFood.amount ?? 0) * val),
+        unit: createFood.unit
       })
       .then(() => {
         showMessage({ status: 'success', title: '記録しました' })
@@ -115,9 +138,9 @@ export const New: VFC = memo(() => {
 
         <FoodDetailAccordion
           createFood={ createFood }
-          onChangeCreatedAt={ onChangeCreatedAt }
-          onChangePlace={ onChangePlace }
-          onChangeMemo={ onChangeMemo }
+          setCreateFood={ setCreateFood }
+          amountEaten={ amountEaten }
+          setAmountEaten={ setAmountEaten }
         />
 
         <FormControl display='flex' alignItems='center' justifyContent='space-between'>

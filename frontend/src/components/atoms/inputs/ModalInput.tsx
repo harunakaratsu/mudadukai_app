@@ -1,14 +1,15 @@
-import { ChangeEvent, memo, VFC } from 'react'
+import { ChangeEvent, CSSProperties, memo, VFC } from 'react'
 import { Input } from '@chakra-ui/react'
 
 type Props = {
   value: number | string,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   type?: string
+  style?: CSSProperties
 }
 
 export const ModalInput: VFC<Props> = memo((props) => {
-  const { value, onChange, type } = props
+  const { value, onChange, type, style } = props
 
   return (
     <Input
@@ -17,6 +18,7 @@ export const ModalInput: VFC<Props> = memo((props) => {
       onChange={ onChange }
       bg='white'
       type={ type }
+      style={ style }
     />
   )
 })
