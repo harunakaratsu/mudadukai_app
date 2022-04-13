@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Flex, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react'
 import { HamburgerIcon, SmallCloseIcon } from '@chakra-ui/icons'
 
-import { Food } from '../../type/Food'
+import { Food } from '../../types/Food'
 import { useFavoriteFoods } from '../../hooks/useFavoriteFoods'
 import { useMessage } from '../../hooks/useMessage'
 

@@ -1,17 +1,17 @@
 import { memo, useEffect, useState, VFC, Dispatch, SetStateAction } from 'react'
 import { Drawer, DrawerBody, DrawerContent, FormControl, FormLabel, InputGroup, InputRightElement, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
-import { Food } from '../../type/Food'
-import { usePigImages } from '../../hooks/usePigImages'
-import { useBgColor } from '../../hooks/useBgColor'
-import { FoodsDetailTable } from '../molecules/FoodsDetailTable'
-import { ReadOnlyInput } from '../atoms/inputs/ReadOnluInput'
+import { Food } from '../../../types/Food'
+import { usePigImages } from '../../../hooks/usePigImages'
+import { useBgColor } from '../../../hooks/useBgColor'
+import { FoodsDetailTable } from '../../molecules/FoodsDetailTable'
+import { ReadOnlyInput } from '../../atoms/inputs/ReadOnluInput'
 
 type Props = {
   isOpen: boolean,
   onCloseDrawer: () => void,
   foods?: Food[],
-  clickDay?: string,
+  clickDay: string,
   setFoods: Dispatch<SetStateAction<Food[]>>
 }
 

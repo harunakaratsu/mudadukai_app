@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_30_043457) do
+ActiveRecord::Schema.define(version: 2022_04_08_114627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 2022_03_30_043457) do
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
 
+  create_table "target_values", force: :cascade do |t|
+    t.integer "price", default: 0, null: false
+    t.integer "calorie", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.string "year_month", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "year_month"], name: "index_target_values_on_user_id_and_year_month", unique: true
+    t.index ["user_id"], name: "index_target_values_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "line_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -38,4 +49,5 @@ ActiveRecord::Schema.define(version: 2022_03_30_043457) do
   end
 
   add_foreign_key "foods", "users"
+  add_foreign_key "target_values", "users"
 end

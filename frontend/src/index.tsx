@@ -6,7 +6,7 @@ import axios from 'axios'
 import { App } from './App'
 import './style.scss'
 
-// pathがnewかcalendarならログインする
+// pathが/か/newか/new/scannerならログインする
 const requireLoginPath = [ '/', '/new', '/new/scanner' ]
 if (requireLoginPath.includes(window.location.pathname)) {
   liff

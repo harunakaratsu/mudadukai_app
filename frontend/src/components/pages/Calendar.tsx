@@ -1,18 +1,16 @@
 import { memo, useCallback, useEffect, useState, VFC } from 'react'
 import dayjs from 'dayjs'
-import { Box, FormControl, FormLabel, Heading, InputGroup, InputRightElement, Stack, useDisclosure } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
 
 import FullCalendar, { DatesSetArg, EventClickArg } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 import allLocales from '@fullcalendar/core/locales-all'
 
-import { Food } from '../../type/Food'
+import { Food } from '../../types/Food'
 import { useFoods } from '../../hooks/useFoods'
-import { usePigImages } from '../../hooks/usePigImages'
-import { useBgColor } from '../../hooks/useBgColor'
-import { ClickDayFoodsDetailDrawer } from '../organisms/ClickDayFoodsDetailDrawer'
-import { ReadOnlyInput } from '../atoms/inputs/ReadOnluInput'
+import { ClickDayFoodsDetailDrawer } from '../organisms/drawers/ClickDayFoodsDetailDrawer'
+import { MonthRecordCard } from '../organisms/MonthRecordlCard'
 
 export const Calendar: VFC = memo(() => {
   const [ clickDayFoods, setClickDayFoods ] = useState<Food[]>()
@@ -31,9 +29,6 @@ export const Calendar: VFC = memo(() => {
       calorie: currentFoods.map(food => food.calorie || 0).reduce((a, b) => a + b, 0)
     })
   }, [currentYearMonth, foods])
-
-  const { pigImages } = usePigImages()
-  const { bgColor } = useBgColor()
 
   // 日を消す
   const dayCellContent = useCallback((e: any) => e.dayNumberText = e.dayNumberText.replace('日', ''), [])
@@ -58,6 +53,13 @@ export const Calendar: VFC = memo(() => {
     onOpen()
   }, [onOpen, foods])
 
+  // 表示されている年と月を取得する
+  const dateSet = useCallback((arg: DatesSetArg) => {
+    setCurrentYearMonth(
+      dayjs(arg.view.currentStart).format('YYYY年MM月')
+    )
+  }, [])
+
   return (
     <>
     <FullCalendar
@@ -79,11 +81,7 @@ export const Calendar: VFC = memo(() => {
       })) }
       eventClick={ onClickEvent }
       dateClick={ onClickDate }
-      datesSet={(arg: DatesSetArg) => {
-        setCurrentYearMonth(
-          dayjs(arg.view.activeStart).add(1, 'month').format('YYYY年MM月')
-        )
-      }}
+      datesSet={ dateSet }
     />
 
     {/* ドロワー */}
@@ -96,37 +94,10 @@ export const Calendar: VFC = memo(() => {
     />
 
     {/* 月ごとの記録 */}
-    <Box
-      m={5}
-      px={5}
-      py={10}
-      boxShadow='lg'
-      borderRadius={10}
-      bg={ bgColor({ food: { price: currentYearMonthFoods.price }, basePrice: 1000 }) }
-    >
-      <Stack spacing={5}>
-        <Heading as='h4' size='md' textAlign='center' pb={5}>
-          { currentYearMonth }の記録
-        </Heading>
-
-        { pigImages({ food: { calorie: currentYearMonthFoods.calorie }, baseCalorie: 1000 }) }
-
-        <FormControl>
-          <FormLabel>使った金額</FormLabel>
-          <InputGroup>
-            <ReadOnlyInput value={ currentYearMonthFoods.price } />
-            <InputRightElement children='円' />
-          </InputGroup>
-        </FormControl>
-        <FormControl>
-          <FormLabel>摂取カロリー</FormLabel>
-          <InputGroup>
-            <ReadOnlyInput value={ currentYearMonthFoods.calorie } />
-            <InputRightElement children='kcal' mr='2' />
-          </InputGroup>
-        </FormControl>
-      </Stack>
-    </Box>
+    <MonthRecordCard
+      currentYearMonthFoods={ currentYearMonthFoods }
+      currentYearMonth={ currentYearMonth }
+    />
     </>
   )
 })

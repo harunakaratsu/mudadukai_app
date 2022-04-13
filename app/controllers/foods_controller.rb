@@ -10,6 +10,7 @@ class FoodsController < ApplicationController
     food = current_user.foods.new(food_params)
 
     if food.save
+      notification
       render json: food, status: :created
     else
       render json: {}, status: :internal_server_error
@@ -18,6 +19,7 @@ class FoodsController < ApplicationController
 
   def update
     if @food.update(food_params)
+      notification
       render json: @food, status: :ok
     else
       render json: {}, status: :internal_server_error

@@ -136,3 +136,12 @@ body {
 .css-17kf94w, .css-ur97uj {
   z-index: 1 !important;
 }
+
+.ui-tabs-nav .ui-state-focus a {
+  outline: none !important;
+}
+
+// タブの青い枠を消す
+*:focus {
+  box-shadow: none !important;
+}

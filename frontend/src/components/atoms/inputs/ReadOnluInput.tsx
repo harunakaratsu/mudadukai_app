@@ -2,7 +2,7 @@ import { memo, VFC } from 'react'
 import { Input } from '@chakra-ui/react'
 
 type Props = {
-  value: number
+  value: number | string
 }
 
 export const ReadOnlyInput: VFC<Props> = memo((props) => {

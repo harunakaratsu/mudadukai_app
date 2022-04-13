@@ -29,9 +29,9 @@ RSpec.describe Food, type: :model do
     end
   end
 
-  context '金額が0以下である場合' do
+  context '金額が0より下である場合' do
     it '無効であること' do
-      food = build(:food, price: 0)
+      food = build(:food, price: -1)
       expect(food).to  be_invalid
     end
   end
@@ -43,9 +43,9 @@ RSpec.describe Food, type: :model do
     end
   end
 
-  context 'カロリーが0以下である場合' do
+  context 'カロリーが0より下である場合' do
     it '無効であること' do
-      food = build(:food, calorie: 0)
+      food = build(:food, calorie: -1)
       expect(food).to  be_invalid
     end
   end
@@ -77,6 +77,14 @@ RSpec.describe Food, type: :model do
       expect(food).to be_invalid
     end
   end
+
+  context '分量が0より下である場合' do
+    it '無効であること' do
+      food = build(:food, amount: -1)
+      expect(food).to be_invalid
+    end
+  end
+  
 
   context 'ユーザーが削除された場合' do
     it 'foodも削除されること' do
