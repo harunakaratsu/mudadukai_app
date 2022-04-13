@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :favorite_foods
     end
   end
+  resources :target_values, only: %i[index create update destroy]
   post 'search_name_and_price', to: 'searches#search_name_and_price'
   post 'search_calorie', to: 'searches#search_calorie'
 

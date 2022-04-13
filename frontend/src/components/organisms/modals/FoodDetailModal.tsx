@@ -3,12 +3,12 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea } from '@chakra-ui/react'
 
-import { Food } from '../../type/Food'
-import { usePigImages } from '../../hooks/usePigImages'
-import { useBgColor } from '../../hooks/useBgColor'
-import { useFoods } from '../../hooks/useFoods'
-import { useMessage } from '../../hooks/useMessage'
-import { ModalInput } from '../atoms/inputs/ModalInput'
+import { Food } from '../../../types/Food'
+import { usePigImages } from '../../../hooks/usePigImages'
+import { useBgColor } from '../../../hooks/useBgColor'
+import { useFoods } from '../../../hooks/useFoods'
+import { useMessage } from '../../../hooks/useMessage'
+import { ModalInput } from '../../atoms/inputs/ModalInput'
 
 type Props = {
   isOpen: boolean,

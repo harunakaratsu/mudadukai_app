@@ -2,7 +2,7 @@ import { BaseSyntheticEvent, Dispatch, memo, SetStateAction, useState, VFC } fro
 import Autosuggest from 'react-autosuggest'
 
 import { useFoods } from '../../hooks/useFoods'
-import { Food } from '../../type/Food'
+import { Food } from '../../types/Food'
 
 type Props = {
   createFood: Omit<Food, 'id'>

@@ -5,14 +5,14 @@ import dayjs from 'dayjs'
 import liff from '@line/liff/dist/lib'
 import { Button, Center, Flex, FormControl, FormLabel, InputGroup, InputRightElement, Link, Stack, Switch, Text } from '@chakra-ui/react'
 
-import { FoodDetailAccordion } from '../organisms/FoodDetailAccordion'
-import { FavoritesMenu } from '../organisms/FavoritesMenu'
-import { Suggest } from '../organisms/Suggest'
-import { useMessage } from '../../hooks/useMessage'
+import { Suggest } from '../atoms/Suggest'
 import { PigImage } from '../atoms/images/PigImage'
 import { CreateInput } from '../atoms/inputs/CreateInput'
-import { Food } from '../../type/Food'
-import { State } from '../../type/State'
+import { FoodDetailAccordion } from '../organisms/FoodDetailAccordion'
+import { FavoritesMenu } from '../organisms/FavoritesMenu'
+import { useMessage } from '../../hooks/useMessage'
+import { Food } from '../../types/Food'
+import { State } from '../../types/State'
 
 export const New: VFC = memo(() => {
   const initialValue = {

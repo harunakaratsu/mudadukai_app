@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Table, TableCaption, Tbody } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
 
-import { Food } from '../../type/Food'
+import { Food } from '../../types/Food'
 import { FoodTr } from './FoodTr'
 
 type Props = {

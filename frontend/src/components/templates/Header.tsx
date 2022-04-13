@@ -2,7 +2,7 @@ import { memo, useCallback, VFC } from 'react'
 import { Flex, Heading, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 
-import { HeaderDrawer } from '../organisms/HeaderDrawer'
+import { HeaderDrawer } from '../organisms/drawers/HeaderDrawer'
 
 export const Header: VFC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure()

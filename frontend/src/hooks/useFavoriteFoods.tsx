@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Food } from '../type/Food'
+
+import { Food } from '../types/Food'
 
 export const useFavoriteFoods = () => {
   const [ favoriteFoods, setFavoriteFoods ] = useState<Food[]>([])

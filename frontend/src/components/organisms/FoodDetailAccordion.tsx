@@ -3,7 +3,7 @@ import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Box, Stack, 
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
 import { CreateInput } from '../atoms/inputs/CreateInput'
-import { Food } from '../../type/Food'
+import { Food } from '../../types/Food'
 
 type Props = {
   createFood: Omit<Food, "id">,

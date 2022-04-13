@@ -2,8 +2,8 @@ import { memo, useCallback, VFC, Dispatch, SetStateAction } from 'react'
 import { Td, Tr, useDisclosure } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
-import { Food } from '../../type/Food'
-import { FoodDetailModal } from '../organisms/FoodDetailModal'
+import { Food } from '../../types/Food'
+import { FoodDetailModal } from '../organisms/modals/FoodDetailModal'
 
 type Props = {
   food: Food,
