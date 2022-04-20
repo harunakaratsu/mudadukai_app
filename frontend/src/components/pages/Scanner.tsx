@@ -12,29 +12,19 @@ export const Scanner: VFC = memo(() => {
     axios.post('/search_name_and_price', { jan_code: result })
          .then((res) => {
            const name = res.data.name
-           const company = res.data.company
-           const search_word = `${company} ${name}`
            const price = res.data.price
-           const amount = res.data.amount
-           
-           // カロリーを取得する
-           axios.post('/search_calorie', { search_word: search_word, amount: amount, jan_code: result })
-                .then(res => {
-                  const calorie = res.data.calorie
-                  const newAmount = amount && Number(amount.split(' ')[1])
-                  const unit = amount && amount.split(' ')[2]
-                  // 入力画面に移動する
-                  navigate('/new', { 
-                    state: { 
-                      name: name,
-                      price: price,
-                      calorie: calorie,
-                      amount: newAmount,
-                      unit: unit
-                    } 
-                  })
-                })
-                .catch(e => console.error(e))
+           const amount = res.data.amount.replace(/[^0-9]/g, '')
+           const unit = res.data.amount.replace(/[0-9]/g, '')
+
+           // 入力画面に移動する
+           navigate('/new', {
+            state: {
+              name: name,
+              price: price,
+              amount: amount,
+              unit: unit
+            } 
+           })
          })
          .catch(e => console.error(e))
   }
