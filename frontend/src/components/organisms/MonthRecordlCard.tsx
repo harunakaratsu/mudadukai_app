@@ -85,11 +85,13 @@ export const MonthRecordCard: VFC<Props> = memo((props) => {
               />
             </Flex>
           </FormControl>
+          { getTargetValue &&
             <Chart
               targetValue={ (getTargetValue?.price || 0) - currentYearMonthFoods.price }
               currentValue={ currentYearMonthFoods.price }
               unit='円'
             />
+          }
         </TabPanel>
 
         <TabPanel>
@@ -116,11 +118,13 @@ export const MonthRecordCard: VFC<Props> = memo((props) => {
               />
             </Flex>
           </FormControl>
-          <Chart
-            targetValue={ (getTargetValue?.calorie || 0) - currentYearMonthFoods.calorie }
-            currentValue={ currentYearMonthFoods.calorie }
-            unit='kcal'
-          />
+          { getTargetValue &&
+            <Chart
+              targetValue={ (getTargetValue?.calorie || 0) - currentYearMonthFoods.calorie }
+              currentValue={ currentYearMonthFoods.calorie }
+              unit='kcal'
+            />
+          }
         </TabPanel>
       </TabPanels>
     </Tabs>

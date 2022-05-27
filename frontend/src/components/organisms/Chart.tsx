@@ -21,11 +21,11 @@ export const Chart: VFC<Props> = memo((props) => {
 
   const data = [
     {
-      name: `現在の値`,
+      name: '現在の値',
       value: currentValue
     },
     {
-      name: `残りの値`,
+      name: '残りの値',
       value: targetValue > 0 ? targetValue : 0
     }
   ]
