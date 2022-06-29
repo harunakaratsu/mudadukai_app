@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, VFC, Dispatch, SetStateAction } from 'react'
+import { memo, useEffect, useState, FC, Dispatch, SetStateAction } from 'react'
 import { Drawer, DrawerBody, DrawerContent, FormControl, FormLabel, InputGroup, InputRightElement, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import { Food } from '../../../types/Food'
@@ -15,7 +15,7 @@ type Props = {
   setFoods: Dispatch<SetStateAction<Food[]>>
 }
 
-export const ClickDayFoodsDetailDrawer: VFC<Props> = memo((props) => {
+export const ClickDayFoodsDetailDrawer: FC<Props> = memo((props) => {
   const { isOpen, onCloseDrawer, foods, clickDay, setFoods } = props
   const [ foodsPrice, setFoodsPrice ] = useState<number | null>()
   const [ foodsCalorie, setFoodsCalorie ] = useState<number | null>()

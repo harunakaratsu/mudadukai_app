@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from 'react'
+import { memo, useCallback, useEffect, useState, FC, ChangeEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import dayjs from 'dayjs'
@@ -14,7 +14,7 @@ import { useMessage } from '../../hooks/useMessage'
 import { Food } from '../../types/Food'
 import { State } from '../../types/State'
 
-export const New: VFC = memo(() => {
+export const New: FC = memo(() => {
   const initialValue = {
     name: '',
     price: null,
@@ -64,9 +64,9 @@ export const New: VFC = memo(() => {
     }
   }, [showMessage, state])
 
-  const onChangePrice = useCallback((e) => setCreateFood({...createFood, price: e.target.value}), [createFood])
-  const onChangeCalorie = useCallback((e) => setCreateFood({...createFood, calorie: e.target.value}), [createFood])
-  const onChangeFavorite = useCallback((e) => setCreateFood({...createFood, favorite: e.target.checked}), [createFood])
+  const onChangePrice = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, price: Number(e.target.value)}), [createFood])
+  const onChangeCalorie = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, calorie: Number(e.target.value)}), [createFood])
+  const onChangeFavorite = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, favorite: e.target.checked}), [createFood])
 
   // 入力欄をリセットする
   const resetInput = () => {

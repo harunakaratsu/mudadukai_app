@@ -1,11 +1,11 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Image } from '@chakra-ui/react'
 
 type Props = { 
   size: number
 }
 
-export const PigImage: VFC<Props> = memo((props) => {
+export const PigImage: FC<Props> = memo((props) => {
   const { size } = props
 
   return (

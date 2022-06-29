@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC, Dispatch, SetStateAction } from 'react'
+import { memo, useCallback, FC, Dispatch, SetStateAction } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Table, TableCaption, Tbody } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
@@ -12,7 +12,7 @@ type Props = {
   setFoods: Dispatch<SetStateAction<Food[]>>
 }
 
-export const FoodsDetailTable: VFC<Props> = memo((props) => {
+export const FoodsDetailTable: FC<Props> = memo((props) => {
   const { foods, onCloseDrawer, setFoods } = props
 
   // 入力画面へ移動

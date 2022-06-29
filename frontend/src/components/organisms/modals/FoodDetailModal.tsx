@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, memo, SetStateAction, useState, VFC } from 'react'
+import { ChangeEvent, Dispatch, memo, SetStateAction, useState, FC } from 'react'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Textarea } from '@chakra-ui/react'
@@ -18,7 +18,7 @@ type Props = {
   setFoods: Dispatch<SetStateAction<Food[]>>
 }
 
-export const FoodDetailModal: VFC<Props> = memo((props) => {
+export const FoodDetailModal: FC<Props> = memo((props) => {
   const { isOpen, onClose, food, onCloseDrawer, setFoods } = props
   const { foods } = useFoods()
   const { showMessage } = useMessage()

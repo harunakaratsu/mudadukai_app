@@ -1,9 +1,9 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Box, Container, Flex, Image, Stack, Text } from '@chakra-ui/react'
 
 import MainImage from '../../images/main-image.png'
 
-export const TopImage: VFC = memo(() => {
+export const TopImage: FC = memo(() => {
   return (
     <Box bg='red.300' p={6}>
       <Container>

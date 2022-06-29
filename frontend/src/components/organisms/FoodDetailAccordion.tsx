@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useCallback, VFC } from 'react'
+import { Dispatch, memo, SetStateAction, useCallback, FC, ChangeEvent } from 'react'
 import { Accordion, AccordionItem, AccordionButton, AccordionPanel, Box, Stack, FormControl, Textarea, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 
@@ -12,15 +12,15 @@ type Props = {
   setAmountEaten: Dispatch<SetStateAction<number | null | undefined>>
 }
 
-export const FoodDetailAccordion: VFC<Props> = memo((props) => {
+export const FoodDetailAccordion: FC<Props> = memo((props) => {
   const { createFood, setCreateFood, amountEaten, setAmountEaten } = props
 
-  const onChangeCreatedAt = useCallback((e) => setCreateFood({...createFood, created_at: e.target.value}), [createFood, setCreateFood])
-  const onChangePlace = useCallback((e) => setCreateFood({...createFood, place: e.target.value}), [createFood, setCreateFood])
-  const onChangeMemo = useCallback((e) => setCreateFood({...createFood, memo: e.target.value}), [createFood, setCreateFood])
-  const onChangeAmount = useCallback((e) => setCreateFood({...createFood, amount: e.target.value}), [createFood, setCreateFood])
-  const onChangeUnit = useCallback((e) => setCreateFood({...createFood, unit: e.target.value}), [createFood, setCreateFood])
-  const onChangeAmountEaten = useCallback((e) => setAmountEaten(e.target.value), [setAmountEaten])
+  const onChangeCreatedAt = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, created_at: e.target.value}), [createFood, setCreateFood])
+  const onChangePlace = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, place: e.target.value}), [createFood, setCreateFood])
+  const onChangeMemo = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => setCreateFood({...createFood, memo: e.target.value}), [createFood, setCreateFood])
+  const onChangeAmount = useCallback((e:  ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, amount: Number(e.target.value)}), [createFood, setCreateFood])
+  const onChangeUnit = useCallback((e: ChangeEvent<HTMLInputElement>) => setCreateFood({...createFood, unit: e.target.value}), [createFood, setCreateFood])
+  const onChangeAmountEaten = useCallback((e: ChangeEvent<HTMLInputElement>) => setAmountEaten(Number(e.target.value)), [setAmountEaten])
 
   return (
     <Accordion allowMultiple>

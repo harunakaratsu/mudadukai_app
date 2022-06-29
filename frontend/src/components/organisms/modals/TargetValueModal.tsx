@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, memo, SetStateAction, useEffect, useState, VFC } from 'react'
+import { ChangeEvent, Dispatch, memo, SetStateAction, useEffect, useState, FC } from 'react'
 import axios from 'axios'
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Button, FormControl, FormLabel, Stack, InputGroup, InputRightElement } from '@chakra-ui/react'
 
@@ -14,7 +14,7 @@ type Props = {
   setTargetValues: Dispatch<SetStateAction<TargetValue[]>>
 }
 
-export const TargetValueModal: VFC<Props> = memo((props) => {
+export const TargetValueModal: FC<Props> = memo((props) => {
   const { isOpen, onClose, currentYearMonth, targetValues, setTargetValues } = props
   const { showMessage } = useMessage()
 

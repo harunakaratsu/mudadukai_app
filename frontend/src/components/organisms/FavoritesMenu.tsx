@@ -1,4 +1,4 @@
-import { Dispatch, memo, SetStateAction, useCallback, VFC } from 'react'
+import { Dispatch, memo, SetStateAction, useCallback, FC } from 'react'
 import axios from 'axios'
 import { Flex, Menu, MenuButton, MenuGroup, MenuItem, MenuList } from '@chakra-ui/react'
 import { HamburgerIcon, SmallCloseIcon } from '@chakra-ui/icons'
@@ -12,13 +12,13 @@ type Props = {
   setCreateFood: Dispatch<SetStateAction<Omit<Food, 'id'>>>
 }
 
-export const FavoritesMenu: VFC<Props> = memo((props) => {
+export const FavoritesMenu: FC<Props> = memo((props) => {
   const { createFood, setCreateFood } = props
   const { favoriteFoods, setFavoriteFoods } = useFavoriteFoods()
   const { showMessage } = useMessage()
 
   // お気に入りをクリックしたら値をセットする
-  const onClickFavorite = useCallback((favoriteFood) => {
+  const onClickFavorite = useCallback((favoriteFood: Food) => {
     setCreateFood({
       ...createFood,
       name: favoriteFood.name,

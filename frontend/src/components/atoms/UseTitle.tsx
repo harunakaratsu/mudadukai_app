@@ -1,11 +1,11 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Heading } from '@chakra-ui/react'
 
 type Props = {
   children: string
 }
 
-export const UseTitle: VFC<Props> = memo((props) => {
+export const UseTitle: FC<Props> = memo((props) => {
   const { children } = props
 
   return (

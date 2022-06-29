@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, Dispatch, memo, SetStateAction, useState, VFC } from 'react'
+import { BaseSyntheticEvent, Dispatch, memo, SetStateAction, useState, FC } from 'react'
 import Autosuggest from 'react-autosuggest'
 
 import { useFoods } from '../../hooks/useFoods'
@@ -9,7 +9,7 @@ type Props = {
   setCreateFood: Dispatch<SetStateAction<Omit<Food, 'id'>>>
 }
 
-export const Suggest: VFC<Props> = memo((props) => {
+export const Suggest: FC<Props> = memo((props) => {
   const { createFood, setCreateFood } = props
   const [ suggestions, setSuggestions ] = useState<Food[]>([])
   const { foods } = useFoods()

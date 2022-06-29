@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, memo, VFC } from 'react'
+import { ChangeEvent, CSSProperties, memo, FC } from 'react'
 import { Input } from '@chakra-ui/react'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   style?: CSSProperties
 }
 
-export const ModalInput: VFC<Props> = memo((props) => {
+export const ModalInput: FC<Props> = memo((props) => {
   const { value, onChange, type, style } = props
 
   return (

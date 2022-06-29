@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC } from 'react'
+import { memo, useCallback, FC } from 'react'
 import { Link as Scroll } from 'react-scroll'
 import { Drawer, DrawerOverlay, DrawerContent, DrawerCloseButton, DrawerBody, Stack, Link, Button } from '@chakra-ui/react'
 
@@ -7,7 +7,7 @@ type Props = {
   onClose: () => void
 }
 
-export const HeaderDrawer: VFC<Props> = memo((props) => {
+export const HeaderDrawer: FC<Props> = memo((props) => {
   const { isOpen, onClose } = props
 
   const onClickButton = useCallback(() => onClose(), [onClose])

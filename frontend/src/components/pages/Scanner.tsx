@@ -1,9 +1,9 @@
-import { memo, useEffect, VFC } from 'react'
+import { memo, useEffect, FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Quagga, { QuaggaJSResultObject } from '@ericblade/quagga2'
 import axios from 'axios'
 
-export const Scanner: VFC = memo(() => {
+export const Scanner: FC = memo(() => {
   const navigate = useNavigate()
 
   const onDetected = (result: string | null) => {

@@ -1,7 +1,7 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Flex, Heading, ListItem, OrderedList, Stack, Text } from '@chakra-ui/react'
 
-export const Terms:VFC = memo(() => {
+export const Terms:FC = memo(() => {
   return (
     <Flex align='center' px={{ base: 5, md: 20 }}>
       <Stack spacing={8}>
