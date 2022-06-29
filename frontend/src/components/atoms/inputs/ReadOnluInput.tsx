@@ -1,11 +1,11 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Input } from '@chakra-ui/react'
 
 type Props = {
   value: number | string
 }
 
-export const ReadOnlyInput: VFC<Props> = memo((props) => {
+export const ReadOnlyInput: FC<Props> = memo((props) => {
   const { value } = props
 
   return (

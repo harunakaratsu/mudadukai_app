@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Box, Button, Center, Container, Flex, Heading, Image, Link } from '@chakra-ui/react'
 import { ArrowRightIcon } from '@chakra-ui/icons'
 
@@ -9,7 +9,7 @@ import Image21 from '../../images/image21.png'
 import Image22 from '../../images/image22.png'
 import Image23 from '../../images/image23.png'
 
-export const HowToUse: VFC = memo(() => {
+export const HowToUse: FC = memo(() => {
   return (
     <Box py={10} bg='red.50'>
       <Container maxW='container.lg'>

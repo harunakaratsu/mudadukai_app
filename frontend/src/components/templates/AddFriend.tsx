@@ -1,7 +1,7 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Box, Heading, Image, Text, Container, Center } from '@chakra-ui/react'
 
-export const AddFriend: VFC = memo(() => {
+export const AddFriend: FC = memo(() => {
   return (
     <Box py={10} id='addFriend'>
       <Container maxW='container.lg'>

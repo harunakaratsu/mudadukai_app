@@ -1,10 +1,10 @@
-import { memo, useCallback, VFC } from 'react'
+import { memo, useCallback, FC } from 'react'
 import { Flex, Heading, useDisclosure } from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 
 import { HeaderDrawer } from '../organisms/drawers/HeaderDrawer'
 
-export const Header: VFC = memo(() => {
+export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const handleToggle = useCallback(() => isOpen ? onClose() : onOpen(), [isOpen, onClose, onOpen])
 

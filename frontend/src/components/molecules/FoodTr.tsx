@@ -1,4 +1,4 @@
-import { memo, useCallback, VFC, Dispatch, SetStateAction } from 'react'
+import { memo, useCallback, FC, Dispatch, SetStateAction } from 'react'
 import { Td, Tr, useDisclosure } from '@chakra-ui/react'
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
@@ -11,7 +11,7 @@ type Props = {
   setFoods: Dispatch<SetStateAction<Food[]>>
 }
 
-export const FoodTr: VFC<Props> = memo((props) => {
+export const FoodTr: FC<Props> = memo((props) => {
   const { food, onCloseDrawer, setFoods } = props
   const { isOpen, onOpen, onClose } = useDisclosure()
 

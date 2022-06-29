@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Button, Flex, FormControl, FormLabel, InputGroup, InputRightElement, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, useDisclosure } from '@chakra-ui/react'
 
 import { ReadOnlyInput } from '../atoms/inputs/ReadOnluInput'
@@ -16,7 +16,7 @@ type Props = {
   currentYearMonth: string
 }
 
-export const MonthRecordCard: VFC<Props> = memo((props) => {
+export const MonthRecordCard: FC<Props> = memo((props) => {
   const { currentYearMonthFoods, currentYearMonth } = props
 
   // hooks

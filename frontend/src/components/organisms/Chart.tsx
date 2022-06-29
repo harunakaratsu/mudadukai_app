@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { PieChart, Pie, Cell, Text, ResponsiveContainer, Label, Legend } from 'recharts'
 
 type Props = {
@@ -16,7 +16,7 @@ type Arg = {
   percent: number
 }
 
-export const Chart: VFC<Props> = memo((props) => {
+export const Chart: FC<Props> = memo((props) => {
   const { currentValue, targetValue, unit } = props
 
   const data = [

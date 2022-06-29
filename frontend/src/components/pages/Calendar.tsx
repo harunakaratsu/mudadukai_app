@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, VFC } from 'react'
+import { memo, useCallback, useEffect, useState, FC } from 'react'
 import dayjs from 'dayjs'
 import { useDisclosure } from '@chakra-ui/react'
 
@@ -12,7 +12,7 @@ import { useFoods } from '../../hooks/useFoods'
 import { ClickDayFoodsDetailDrawer } from '../organisms/drawers/ClickDayFoodsDetailDrawer'
 import { MonthRecordCard } from '../organisms/MonthRecordlCard'
 
-export const Calendar: VFC = memo(() => {
+export const Calendar: FC = memo(() => {
   const [ clickDayFoods, setClickDayFoods ] = useState<Food[]>()
   const [ clickDay, setClickDay ] = useState('')
   const [ currentYearMonth, setCurrentYearMonth ] = useState('')

@@ -1,4 +1,4 @@
-import { memo, VFC } from 'react'
+import { memo, FC } from 'react'
 import { Link as Scroll } from 'react-scroll'
 import { Box, Container, Flex, Heading, Image, Link, Stack, Text } from '@chakra-ui/react'
 
@@ -27,7 +27,7 @@ import Image26 from '../../images/image26.png'
 import Image27 from '../../images/image27.png'
 import Image28 from '../../images/image28.png'
 
-export const Use: VFC = memo(() => {
+export const Use: FC = memo(() => {
   return (
     <>
       <Heading as='h1' size='lg' textAlign='center' py={10}>
