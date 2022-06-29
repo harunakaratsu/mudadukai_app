@@ -1,6 +1,4 @@
 class SearchesController < ApplicationController
-  require 'open-uri'
-  require 'nokogiri'
   require 'net/http'
   require 'uri'
 
