@@ -20,12 +20,14 @@ class ApplicationController < ActionController::API
   end
 
   def notification
-    if current_user.over_target_value?
-      text = '無駄遣いが目標値を超えました！もう無駄遣いはやめましょう！'
-      push_message(text, current_user)
-    elsif current_user.over_target_value?(0.8)
-      text = '無駄遣いが目標値の80%を超えました！無駄遣いを控えましょう！'
-      push_message(text, current_user)
+    if current_user.this_month_target_value
+      if current_user.over_target_value?
+        text = '無駄遣いが目標値を超えました！もう無駄遣いはやめましょう！'
+        push_message(text, current_user)
+      elsif current_user.over_target_value?(0.8)
+        text = '無駄遣いが目標値の80%を超えました！無駄遣いを控えましょう！'
+        push_message(text, current_user)
+      end
     end
   end
 
