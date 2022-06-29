@@ -84,8 +84,14 @@ RSpec.describe Food, type: :model do
       expect(food).to be_invalid
     end
   end
-  
 
+  context '単位が10文字以上である場合' do
+    it '無効であること' do
+      food = build(:food, unit: 'a' * 11)
+      expect(food).to be_invalid
+    end
+  end
+  
   context 'ユーザーが削除された場合' do
     it 'foodも削除されること' do
       food = build(:food)

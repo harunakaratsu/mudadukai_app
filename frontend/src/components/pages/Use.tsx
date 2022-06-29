@@ -14,13 +14,18 @@ import Image07 from '../../images/image07.png'
 import Image08 from '../../images/image08.png'
 import Image09 from '../../images/image09.png'
 import Image10 from '../../images/image10.png'
-import Image11 from '../../images/image11.png'
 import Image15 from '../../images/image15.png'
 import Image16 from '../../images/image16.png'
 import Image17 from '../../images/image17.png'
 import Image18 from '../../images/image18.png'
 import Image19 from '../../images/image19.png'
 import Image20 from '../../images/image20.png'
+import Image23 from '../../images/image23.png'
+import Image24 from '../../images/image24.png'
+import Image25 from '../../images/image25.png'
+import Image26 from '../../images/image26.png'
+import Image27 from '../../images/image27.png'
+import Image28 from '../../images/image28.png'
 
 export const Use: VFC = memo(() => {
   return (
@@ -154,6 +159,26 @@ export const Use: VFC = memo(() => {
                 <Text width='50%'>クリックした食べ物の詳細が表示されます。<br/>間違って記録した場合は、下のボタンから記録の編集や削除ができます。</Text>
                 <Image src={ Image09 } boxSize='45%' />
               </Flex>
+              <Flex justify='space-between'>
+                <Text width='50%'>カレンダーページを下にスクロールすると、今月の使った金額と摂取カロリーの合計が表示されます。</Text>
+                <Image src={ Image28 } boxSize='45%' boxShadow='md' />
+              </Flex>
+              <Flex justify='space-between'>
+                <Text width='50%'>グラフのタブをクリックすると、目標値を設定できます。<br/>設定をクリック。</Text>
+                <Image src={ Image24 } boxSize='45%' boxShadow='md' />
+              </Flex>
+              <Flex justify='space-between'>
+                <Text width='50%'>目標金額と目標カロリーを設定できます。<br/>金額とカロリーを設定したら、設定するをクリック。</Text>
+                <Image src={ Image25 } boxSize='45%' />
+              </Flex>
+              <Flex justify='space-between'>
+                <Text width='50%'>目標値と今月の無駄遣いのグラフが表示されます。<br/>目標値からあとどのくらいの金額やカロリーを摂取できるかを確認できます。</Text>
+                <Image src={ Image26 } boxSize='45%' boxShadow='md' />
+              </Flex>
+              <Flex justify='space-between'>
+                <Text width='50%'>目標値の設定ボタンから目標値の編集と削除ができます。</Text>
+                <Image src={ Image27 } boxSize='45%' />
+              </Flex>
             </Stack>
           </Container>
         </Box>
@@ -162,8 +187,8 @@ export const Use: VFC = memo(() => {
           <Container>
             <UseTitle>5. 通知</UseTitle>
             <Flex justify='space-between'>
-              <Text pt={3} width='50%'>毎週月曜日と毎月1日の9:00にその期間に無駄遣いした金額と摂取カロリーの合計値がメッセージで通知されます。</Text>
-              <Image src={ Image11 } boxSize='45%' />
+              <Text pt={3} width='50%'>無駄遣いが目標値の80%を超えた時と100%を超えた時にメッセージで警告の通知がされます。<br/>目標値が未設定の場合は通知されません。</Text>
+              <Image src={ Image23 } boxSize='45%' />
             </Flex>
           </Container>
         </Box>
